@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador - Geografia de Roraima</title>
+    <title>Simulador FCC - Geografia de Roraima</title>
     <style>
         :root {
             --bg: #f0f2f5;
@@ -16,7 +16,7 @@
             --unanswered: #9e9e9e;
             --primary: #1976d2;
             --primary-hover: #1565c0;
-            --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            --shadow: 0 4px 16px rgba(0,0,0,0.06);
             --option-bg: #f8f9fb;
             --option-hover: #e9edf2;
             --selected: #e3f2fd;
@@ -24,10 +24,8 @@
             --toggle-bg: #cfd4db;
             --toggle-dot: #ffffff;
             --header-bg: #ffffff;
-            --accent: #ffb300;
             --badge-bg: #e8eaf0;
         }
-
         .dark-mode {
             --bg: #121826;
             --card-bg: #1c2333;
@@ -39,7 +37,7 @@
             --unanswered: #6b7280;
             --primary: #64b5f6;
             --primary-hover: #42a5f5;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow: 0 4px 20px rgba(0,0,0,0.4);
             --option-bg: #1e2638;
             --option-hover: #263046;
             --selected: #1e3a5f;
@@ -49,975 +47,552 @@
             --header-bg: #1c2333;
             --badge-bg: #2a3348;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
-            transition: background 0.3s, color 0.3s;
-            line-height: 1.5;
+            background: var(--bg); color: var(--text); min-height:100vh;
+            display:flex; justify-content:center; align-items:flex-start; padding:20px;
+            transition: background 0.3s, color 0.3s; line-height:1.5;
         }
-
         .container {
-            width: 100%;
-            max-width: 950px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            transition: background 0.3s, box-shadow 0.3s;
+            width:100%; max-width:950px; background:var(--card-bg); border-radius:20px;
+            box-shadow:var(--shadow); overflow:hidden; transition:background 0.3s, box-shadow 0.3s;
         }
-
-        /* HEADER */
         .header {
-            background: var(--header-bg);
-            padding: 16px 24px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 16px;
-            transition: background 0.3s, border 0.3s;
+            background:var(--header-bg); padding:16px 24px; border-bottom:1px solid var(--border);
+            display:flex; flex-wrap:wrap; align-items:center; gap:16px; transition:background 0.3s, border 0.3s;
         }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 200px;
-        }
-        .logo-icon {
-            font-size: 2rem;
-        }
-        .logo-area h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            color: var(--text);
-            margin: 0;
-        }
-
-        .controls-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
+        .logo-area { display:flex; align-items:center; gap:10px; flex:1; min-width:200px; }
+        .logo-icon { font-size:2rem; }
+        .logo-area h1 { font-size:1.4rem; font-weight:700; letter-spacing:-0.3px; color:var(--text); margin:0; }
+        .controls-group { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
         .subject-selector {
-            padding: 10px 16px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: var(--option-bg);
-            color: var(--text);
-            font-weight: 500;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            min-width: 220px;
+            padding:10px 16px; border-radius:12px; border:1px solid var(--border); background:var(--option-bg);
+            color:var(--text); font-weight:500; font-size:0.9rem; cursor:pointer; transition:all 0.2s; font-family:inherit; min-width:220px;
         }
-        .subject-selector:hover {
-            border-color: var(--primary);
-        }
-        .subject-selector:focus {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-
-        /* TOGGLE BUTTON REFINADO */
+        .subject-selector:hover { border-color:var(--primary); }
+        .subject-selector:focus { outline:2px solid var(--primary); outline-offset:2px; }
         .toggle-mode {
-            background: var(--toggle-bg);
-            border: none;
-            width: 54px;
-            height: 28px;
-            border-radius: 30px;
-            cursor: pointer;
-            position: relative;
-            transition: background 0.3s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 4px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
+            background:var(--toggle-bg); border:none; width:54px; height:28px; border-radius:30px; cursor:pointer;
+            position:relative; transition:background 0.3s, box-shadow 0.2s; display:flex; align-items:center;
+            justify-content:space-between; padding:0 4px; box-shadow:inset 0 1px 3px rgba(0,0,0,0.15);
         }
-        .toggle-mode:hover {
-            box-shadow: 0 0 0 2px var(--primary);
-        }
+        .toggle-mode:hover { box-shadow:0 0 0 2px var(--primary); }
         .toggle-dot {
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: var(--toggle-dot);
-            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-            left: 3px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-            z-index: 2;
+            position:absolute; width:22px; height:22px; border-radius:50%; background:var(--toggle-dot);
+            transition:transform 0.3s cubic-bezier(0.4,0.0,0.2,1); left:3px; box-shadow:0 1px 4px rgba(0,0,0,0.2); z-index:2;
         }
-        .dark-mode .toggle-dot {
-            transform: translateX(26px);
-        }
-
-        .toggle-icon {
-            font-size: 15px;
-            pointer-events: none;
-            z-index: 1;
-            transition: opacity 0.2s;
-            width: 18px;
-            text-align: center;
-        }
-        /* Lua (dark mode) - visível apenas no light mode */
-        .icon-moon {
-            opacity: 1;
-        }
-        .icon-sun {
-            opacity: 0;
-        }
-        .dark-mode .icon-moon {
-            opacity: 0;
-        }
-        .dark-mode .icon-sun {
-            opacity: 1;
-        }
-
+        .dark-mode .toggle-dot { transform:translateX(26px); }
+        .toggle-icon { font-size:15px; pointer-events:none; z-index:1; transition:opacity 0.2s; width:18px; text-align:center; }
+        .icon-moon { opacity:1; } .icon-sun { opacity:0; }
+        .dark-mode .icon-moon { opacity:0; } .dark-mode .icon-sun { opacity:1; }
         .btn-reset {
-            background: var(--badge-bg);
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            background:var(--badge-bg); color:var(--text); border:1px solid var(--border); padding:8px 16px;
+            border-radius:10px; cursor:pointer; font-weight:600; font-size:0.85rem; transition:all 0.2s; font-family:inherit;
+            display:flex; align-items:center; gap:4px;
         }
-        .btn-reset:hover {
-            background: var(--border);
-            transform: translateY(-1px);
-        }
-
-        /* MAIN CONTENT */
-        .main-content {
-            padding: 28px 24px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: var(--border);
-            border-radius: 10px;
-            margin-bottom: 28px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), #42a5f5);
-            border-radius: 10px;
-            transition: width 0.4s ease;
-        }
-
-        .question-area {
-            margin-bottom: 24px;
-        }
-
-        .question-number {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .question-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            line-height: 1.6;
-            margin-bottom: 24px;
-            color: var(--text);
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .btn-reset:hover { background:var(--border); transform:translateY(-1px); }
+        .main-content { padding:28px 24px; }
+        .progress-bar { width:100%; height:10px; background:var(--border); border-radius:10px; margin-bottom:28px; overflow:hidden; }
+        .progress-fill { height:100%; background:linear-gradient(90deg, var(--primary), #42a5f5); border-radius:10px; transition:width 0.4s ease; }
+        .question-area { margin-bottom:24px; }
+        .question-number { font-size:0.85rem; font-weight:600; color:var(--primary); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px; }
+        .question-text { font-size:1.15rem; font-weight:600; line-height:1.6; margin-bottom:24px; color:var(--text); }
+        .options { display:flex; flex-direction:column; gap:12px; }
         .option {
-            padding: 16px 20px;
-            border: 2px solid var(--border);
-            border-radius: 14px;
-            background: var(--option-bg);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.98rem;
-            color: var(--text);
-            position: relative;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
+            padding:16px 20px; border:2px solid var(--border); border-radius:14px; background:var(--option-bg);
+            cursor:pointer; transition:all 0.2s; font-size:0.98rem; color:var(--text); position:relative;
+            display:flex; align-items:flex-start; gap:12px;
         }
-        .option:hover:not(.disabled) {
-            background: var(--option-hover);
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .option.selected {
-            border-color: var(--primary);
-            background: var(--selected);
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(25,118,210,0.15);
-        }
-        .option.correct-choice {
-            border-color: var(--correct) !important;
-            background: #e8f5e9 !important;
-            color: #1b5e20 !important;
-            font-weight: 600;
-        }
-        .dark-mode .option.correct-choice {
-            background: #1b3b1b !important;
-            color: #a5d6a7 !important;
-        }
-        .option.incorrect-choice {
-            border-color: var(--incorrect) !important;
-            background: #ffebee !important;
-            color: #b71c1c !important;
-            font-weight: 600;
-        }
-        .dark-mode .option.incorrect-choice {
-            background: #3e1b1b !important;
-            color: #ef9a9a !important;
-        }
-        .option.disabled {
-            pointer-events: none;
-            opacity: 0.85;
-        }
-        .option-letter {
-            font-weight: 800;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            background: var(--badge-bg);
-            color: var(--text);
-            flex-shrink: 0;
-        }
-        .selected .option-letter {
-            background: var(--primary);
-            color: white;
-        }
-        .correct-choice .option-letter {
-            background: var(--correct);
-            color: white;
-        }
-        .incorrect-choice .option-letter {
-            background: var(--incorrect);
-            color: white;
-        }
-
-        .explanation {
-            margin-top: 20px;
-            padding: 18px;
-            background: var(--explanation-bg);
-            border-left: 5px solid var(--primary);
-            border-radius: 12px;
-            font-size: 0.92rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            display: none;
-        }
-        .explanation.visible {
-            display: block;
-        }
-
-        .navigation {
-            display: flex;
-            gap: 12px;
-            margin-top: 28px;
-            flex-wrap: wrap;
-        }
-        .nav-btn {
-            padding: 12px 28px;
-            border: none;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex: 1;
-            min-width: 110px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        .btn-prev {
-            background: var(--option-bg);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-        .btn-prev:hover:not(:disabled) {
-            background: var(--border);
-        }
-        .btn-next {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(25,118,210,0.3);
-        }
-        .btn-next:hover:not(:disabled) {
-            background: var(--primary-hover);
-            box-shadow: 0 6px 16px rgba(25,118,210,0.4);
-        }
-        .nav-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .status-panel {
-            margin-top: 28px;
-            padding: 18px;
-            background: var(--option-bg);
-            border-radius: 16px;
-            transition: background 0.3s;
-        }
-        .status-panel h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .status-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .status-dot {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: white;
-            border: 2px solid transparent;
-            background: var(--unanswered);
-        }
-        .status-dot.correct {
-            background: var(--correct);
-            border-color: var(--correct);
-        }
-        .status-dot.incorrect {
-            background: var(--incorrect);
-            border-color: var(--incorrect);
-        }
-        .status-dot.active {
-            border-color: var(--primary) !important;
-            box-shadow: 0 0 0 4px rgba(25,118,210,0.3);
-            transform: scale(1.12);
-            z-index: 5;
-        }
-        .status-dot:hover {
-            transform: scale(1.08);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .legend {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-            margin-top: 14px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        .legend span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .legend-dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        .results {
-            margin-top: 24px;
-            padding: 24px;
-            background: var(--option-bg);
-            border-radius: 18px;
-            text-align: center;
-            display: none;
-            border: 2px solid var(--primary);
-        }
-        .results.visible {
-            display: block;
-        }
-        .results h2 {
-            margin-bottom: 14px;
-            color: var(--text);
-        }
-        .score-large {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--primary);
-            margin: 8px 0;
-        }
-        .stats {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-top: 8px;
-            line-height: 1.7;
-        }
-
-        @media (max-width: 620px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .subject-selector {
-                width: 100%;
-            }
-            .status-dot {
-                width: 33px;
-                height: 33px;
-                font-size: 0.75rem;
-            }
-            .question-text {
-                font-size: 1.05rem;
-            }
-            .option {
-                padding: 14px 16px;
-                font-size: 0.9rem;
-            }
-        }
+        .option:hover:not(.disabled) { background:var(--option-hover); border-color:var(--primary); transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.08); }
+        .option.selected { border-color:var(--primary); background:var(--selected); font-weight:500; box-shadow:0 2px 8px rgba(25,118,210,0.15); }
+        .option.correct-choice { border-color:var(--correct)!important; background:#e8f5e9!important; color:#1b5e20!important; font-weight:600; }
+        .dark-mode .option.correct-choice { background:#1b3b1b!important; color:#a5d6a7!important; }
+        .option.incorrect-choice { border-color:var(--incorrect)!important; background:#ffebee!important; color:#b71c1c!important; font-weight:600; }
+        .dark-mode .option.incorrect-choice { background:#3e1b1b!important; color:#ef9a9a!important; }
+        .option.disabled { pointer-events:none; opacity:0.85; }
+        .option-letter { font-weight:800; font-size:0.9rem; display:flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:8px; background:var(--badge-bg); color:var(--text); flex-shrink:0; }
+        .selected .option-letter { background:var(--primary); color:white; }
+        .correct-choice .option-letter { background:var(--correct); color:white; }
+        .incorrect-choice .option-letter { background:var(--incorrect); color:white; }
+        .explanation { margin-top:20px; padding:18px; background:var(--explanation-bg); border-left:5px solid var(--primary); border-radius:12px; font-size:0.92rem; line-height:1.6; color:var(--text-secondary); display:none; }
+        .explanation.visible { display:block; }
+        .navigation { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
+        .nav-btn { padding:12px 28px; border:none; border-radius:14px; font-weight:700; font-size:0.95rem; cursor:pointer; transition:all 0.2s; flex:1; min-width:110px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px; }
+        .btn-prev { background:var(--option-bg); color:var(--text); border:1px solid var(--border); }
+        .btn-prev:hover:not(:disabled) { background:var(--border); }
+        .btn-next { background:var(--primary); color:white; box-shadow:0 4px 12px rgba(25,118,210,0.3); }
+        .btn-next:hover:not(:disabled) { background:var(--primary-hover); box-shadow:0 6px 16px rgba(25,118,210,0.4); }
+        .nav-btn:disabled { opacity:0.4; cursor:not-allowed; transform:none; }
+        .status-panel { margin-top:28px; padding:18px; background:var(--option-bg); border-radius:16px; transition:background 0.3s; }
+        .status-panel h3 { font-size:0.95rem; font-weight:600; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+        .status-grid { display:flex; flex-wrap:wrap; gap:10px; }
+        .status-dot { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; cursor:pointer; transition:all 0.2s; color:white; border:2px solid transparent; background:var(--unanswered); }
+        .status-dot.correct { background:var(--correct); border-color:var(--correct); }
+        .status-dot.incorrect { background:var(--incorrect); border-color:var(--incorrect); }
+        .status-dot.active { border-color:var(--primary)!important; box-shadow:0 0 0 4px rgba(25,118,210,0.3); transform:scale(1.12); z-index:5; }
+        .status-dot:hover { transform:scale(1.08); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+        .legend { display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:0.8rem; color:var(--text-secondary); }
+        .legend span { display:flex; align-items:center; gap:5px; }
+        .legend-dot { width:14px; height:14px; border-radius:4px; display:inline-block; }
+        .results { margin-top:24px; padding:24px; background:var(--option-bg); border-radius:18px; text-align:center; display:none; border:2px solid var(--primary); }
+        .results.visible { display:block; }
+        .results h2 { margin-bottom:14px; color:var(--text); }
+        .score-large { font-size:3.5rem; font-weight:900; color:var(--primary); margin:8px 0; }
+        .stats { color:var(--text-secondary); font-size:1rem; margin-top:8px; line-height:1.7; }
+        @media(max-width:620px){ .header{flex-direction:column;align-items:flex-start} .subject-selector{width:100%} .status-dot{width:33px;height:33px;font-size:0.75rem} .question-text{font-size:1.05rem} .option{padding:14px 16px;font-size:0.9rem} }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo-area">
-                <span class="logo-icon">🌎</span>
-                <h1>Geografia de Roraima</h1>
-            </div>
-            <div class="controls-group">
-                <select class="subject-selector" id="subjectSelect" aria-label="Selecionar assunto">
-                    <option value="clima">🌦️ Clima</option>
-                    <option value="solos">🧱 Solos</option>
-                    <option value="regime_pluviometrico">🌧️ Regime Pluviométrico</option>
-                    <option value="hidrografia">💧 Hidrografia</option>
-                    <option value="relevo">⛰️ Relevo</option>
-                    <option value="economia">💰 Economia do Estado</option>
-                    <option value="extrativismo">🌳 Extrativismo</option>
-                    <option value="agropecuaria">🐂 Agropecuária</option>
-                    <option value="mineracao">⛏️ Mineração</option>
-                    <option value="industria">🏭 Indústria</option>
-                    <option value="comercio">🛒 Comércio</option>
-                </select>
-                <button class="toggle-mode" id="toggleDarkMode" aria-label="Alternar modo escuro">
-                    <span class="toggle-dot"></span>
-                    <span class="toggle-icon icon-moon">🌙</span>
-                    <span class="toggle-icon icon-sun">☀️</span>
-                </button>
-                <button class="btn-reset" id="btnReset" title="Reiniciar questões do assunto">🔄 Reiniciar</button>
-            </div>
-        </div>
-
-        <div class="main-content">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
-            </div>
-
-            <div class="question-area">
-                <div class="question-number" id="questionNumber">Questão 1 de 20</div>
-                <div class="question-text" id="questionText">Carregando...</div>
-                <div class="options" id="optionsContainer"></div>
-                <div class="explanation" id="explanationBox"></div>
-            </div>
-
-            <div class="navigation">
-                <button class="nav-btn btn-prev" id="btnPrev" disabled>⬅️ Anterior</button>
-                <button class="nav-btn btn-next" id="btnNext">Próxima ➡️</button>
-            </div>
-
-            <div class="status-panel">
-                <h3>📋 Painel de Questões</h3>
-                <div class="status-grid" id="statusGrid"></div>
-                <div class="legend">
-                    <span><span class="legend-dot" style="background: #1b8a3b;"></span> Correta</span>
-                    <span><span class="legend-dot" style="background: #d32f2f;"></span> Errada</span>
-                    <span><span class="legend-dot" style="background: #9e9e9e;"></span> Não respondida</span>
-                    <span style="color: var(--primary);">🔵 Atual</span>
-                </div>
-            </div>
-
-            <div class="results" id="resultsBox">
-                <h2>🏆 Resultado Final</h2>
-                <div class="score-large" id="finalScore">0/20</div>
-                <div class="stats" id="finalStats"></div>
-            </div>
+<div class="container">
+    <div class="header">
+        <div class="logo-area"><span class="logo-icon">🌎</span><h1>Geografia de Roraima</h1></div>
+        <div class="controls-group">
+            <select class="subject-selector" id="subjectSelect" aria-label="Selecionar assunto">
+                <option value="clima">🌦️ Clima</option><option value="solos">🧱 Solos</option><option value="regime_pluviometrico">🌧️ Regime Pluviométrico</option><option value="hidrografia">💧 Hidrografia</option><option value="relevo">⛰️ Relevo</option><option value="economia">💰 Economia do Estado</option><option value="extrativismo">🌳 Extrativismo</option><option value="agropecuaria">🐂 Agropecuária</option><option value="mineracao">⛏️ Mineração</option><option value="industria">🏭 Indústria</option><option value="comercio">🛒 Comércio</option>
+            </select>
+            <button class="toggle-mode" id="toggleDarkMode" aria-label="Alternar modo escuro"><span class="toggle-dot"></span><span class="toggle-icon icon-moon">🌙</span><span class="toggle-icon icon-sun">☀️</span></button>
+            <button class="btn-reset" id="btnReset" title="Reiniciar questões do assunto">🔄 Reiniciar</button>
         </div>
     </div>
+    <div class="main-content">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        <div class="question-area">
+            <div class="question-number" id="questionNumber">Questão 1 de 20</div>
+            <div class="question-text" id="questionText">Carregando...</div>
+            <div class="options" id="optionsContainer"></div>
+            <div class="explanation" id="explanationBox"></div>
+        </div>
+        <div class="navigation">
+            <button class="nav-btn btn-prev" id="btnPrev" disabled>⬅️ Anterior</button>
+            <button class="nav-btn btn-next" id="btnNext">Próxima ➡️</button>
+        </div>
+        <div class="status-panel">
+            <h3>📋 Painel de Questões</h3>
+            <div class="status-grid" id="statusGrid"></div>
+            <div class="legend">
+                <span><span class="legend-dot" style="background:#1b8a3b"></span> Correta</span>
+                <span><span class="legend-dot" style="background:#d32f2f"></span> Errada</span>
+                <span><span class="legend-dot" style="background:#9e9e9e"></span> Não respondida</span>
+                <span style="color:var(--primary)">🔵 Atual</span>
+            </div>
+        </div>
+        <div class="results" id="resultsBox">
+            <h2>🏆 Resultado Final</h2>
+            <div class="score-large" id="finalScore">0/20</div>
+            <div class="stats" id="finalStats"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function(){
+const questionBank = {
+clima:[
+{q:"O estado de Roraima apresenta diversidade climática decorrente de sua posição próxima à Linha do Equador, da influência amazônica e do relevo. A classificação climática de Köppen identifica, no território roraimense, os tipos Af, Am e Aw. Sobre a distribuição desses tipos climáticos em Roraima, é correto afirmar que:",options:["O tipo Af predomina no centro-leste e nordeste, com estação seca prolongada.","O tipo Am ocorre exclusivamente nas áreas serranas do norte.","O tipo Aw está associado ao oeste e sudoeste, onde não há estação seca definida.","O tipo Af é encontrado no oeste e sudoeste, caracterizando-se por clima equatorial úmido sem seca significativa.","O tipo Aw cobre integralmente o estado, sem variações regionais."],correct:3,exp:"O tipo <strong>Af</strong> (equatorial úmido, sem seca) ocorre no <strong>oeste e sudoeste</strong> de Roraima."},
+{q:"Considerando a sazonalidade das chuvas em Roraima, popularmente denominam-se 'inverno' e 'verão' os períodos de, respectivamente:",options:["outubro a março (chuvoso) e abril a setembro (seco)","abril a setembro (chuvoso) e outubro a março (seco)","janeiro a junho (chuvoso) e julho a dezembro (seco)","abril a setembro (seco) e outubro a março (chuvoso)","maio a agosto (seco) e setembro a abril (chuvoso)"],correct:1,exp:"Em Roraima, <strong>'inverno'</strong> refere-se ao período chuvoso (abril a setembro) e <strong>'verão'</strong> ao período seco (outubro a março)."},
+{q:"A Zona de Convergência Intertropical (ZCIT) é um dos principais sistemas atmosféricos que influenciam o clima de Roraima. Sobre sua atuação, é correto afirmar:",options:["A ZCIT atua continuamente durante todo o ano sobre Roraima, garantindo chuvas uniformes.","Quando a ZCIT migra para o sul, entre outubro e março, o estado entra em seu período chuvoso.","A ZCIT é formada pelo encontro dos ventos alísios e, ao se posicionar sobre o extremo norte da América do Sul, entre abril e agosto, intensifica as chuvas em Roraima.","A ZCIT não exerce influência sobre Roraima, pois o estado está fora da faixa equatorial.","A atuação da ZCIT sobre Roraima provoca secas severas e queimadas."],correct:2,exp:"A <strong>ZCIT</strong> é formada pelo encontro dos ventos alísios e, quando migra para o norte (abr-ago), favorece as chuvas em Roraima."},
+{q:"O fenômeno El Niño, caracterizado pelo aquecimento anormal das águas do Pacífico Equatorial, provoca alterações climáticas significativas em Roraima. Assinale a alternativa que descreve corretamente esses efeitos:",options:["Aumento das chuvas e risco de enchentes.","Fortalecimento dos ventos alísios e intensificação da ZCIT.","Redução das chuvas, aumento do risco de seca e queimadas.","Queda acentuada das temperaturas médias.","Aumento da umidade relativa do ar e redução da insolação."],correct:2,exp:"O <strong>El Niño</strong> tende a <strong>reduzir as chuvas</strong>, aumentar a seca e as queimadas em Roraima."},
+{q:"O lavrado roraimense é uma formação vegetal de savana associada a condições climáticas específicas. Sobre sua existência, é correto afirmar:",options:["O lavrado decorre da ausência total de chuvas na região.","O lavrado é resultado da má distribuição anual das chuvas, com concentração em poucos meses e seca prolongada.","O lavrado é uma formação florestal densa adaptada ao excesso de umidade.","O lavrado ocorre exclusivamente em áreas de altitude elevada.","O lavrado é um ecossistema artificial criado pela ação humana."],correct:1,exp:"O lavrado existe devido à <strong>má distribuição das chuvas</strong>: chove muito em poucos meses, seguido de seca prolongada."},
+{q:"Nas áreas serranas do norte e noroeste de Roraima, as temperaturas médias anuais são mais baixas que em Boa Vista. Isso se deve principalmente:",options:["À maior proximidade do Oceano Atlântico.","À influência de massas polares.","Ao efeito da altitude, que reduz as temperaturas.","À ausência de cobertura vegetal.","À maior incidência de ventos alísios."],correct:2,exp:"Nas áreas serranas, a <strong>altitude</strong> reduz as temperaturas, resultando em médias mais baixas."},
+{q:"A evapotranspiração da floresta amazônica contribui para o ciclo climático regional. Em Roraima, esse processo está relacionado:",options:["À formação dos ventos alísios.","Ao transporte de vapor d'água pelos 'rios voadores', influenciando o regime de chuvas.","À ocorrência de friagens.","À intensificação do El Niño.","À redução da umidade do ar."],correct:1,exp:"A floresta libera vapor d'água que forma os <strong>'rios voadores'</strong>, influenciando as chuvas."},
+{q:"A massa de ar que atua em Roraima, quente e úmida, originada sobre a Bacia Amazônica, e que contribui para as chuvas convectivas, é denominada:",options:["Massa Polar Atlântica","Massa Tropical Atlântica","Massa Equatorial Continental (mEc)","Massa Equatorial Atlântica (mEa)","Massa de Ar Seco do Lavrado"],correct:2,exp:"A <strong>Massa Equatorial Continental (mEc)</strong> é quente, úmida e atua sobre a Amazônia."},
+{q:"O desmatamento na região amazônica pode afetar o clima de Roraima porque:",options:["Aumenta a evapotranspiração.","Reduz a temperatura local.","Diminui a reciclagem de umidade e pode enfraquecer o regime de chuvas.","Fortalece a ZCIT.","Intensifica os ventos alísios."],correct:2,exp:"O desmatamento <strong>reduz a evapotranspiração</strong>, diminuindo a umidade e enfraquecendo as chuvas."},
+{q:"Em Roraima, o tipo climático Aw, segundo Köppen, caracteriza-se por:",options:["Clima equatorial úmido, sem estação seca.","Clima tropical de savana, com estação seca prolongada.","Clima subtropical, com verões quentes.","Clima semiárido, com chuvas escassas.","Clima de monção, com chuvas intensas o ano todo."],correct:1,exp:"<strong>Aw</strong> é o clima tropical de savana, com seca prolongada (centro-leste e nordeste de RR)."},
+{q:"A temperatura média anual de Boa Vista situa-se em torno de:",options:["22°C","24°C","27°C","30°C","25°C"],correct:2,exp:"Boa Vista tem média anual de aproximadamente <strong>27°C</strong>."},
+{q:"O período de maior incidência de chuvas no centro-norte de Roraima concentra-se nos meses de:",options:["outubro a março","janeiro a abril","maio a agosto","setembro a dezembro","abril a setembro"],correct:4,exp:"As chuvas concentram-se no 'inverno' regional, de <strong>abril a setembro</strong>, com pico entre maio e agosto."},
+{q:"A região sul de Roraima (Rorainópolis) apresenta clima mais próximo do tipo Am/Af, caracterizado por:",options:["Seca severa e prolongada.","Influência direta da Amazônia central, sem estação seca definida.","Baixa umidade relativa do ar.","Grandes amplitudes térmicas diárias.","Predomínio de vegetação de savana."],correct:1,exp:"O sul de RR sofre influência direta da umidade amazônica, com clima <strong>Am/Af</strong> (úmido, sem seca definida)."},
+{q:"As chuvas convectivas em Roraima são caracterizadas por:",options:["Longa duração e baixa intensidade.","Curta duração e forte intensidade.","Ocorrência apenas no inverno astronômico.","Serem exclusivas do período seco.","Estarem associadas a frentes frias."],correct:1,exp:"As chuvas convectivas, típicas da região equatorial, são de <strong>curta duração e forte intensidade</strong>."},
+{q:"A umidade relativa do ar em Roraima atinge seus menores valores, em média, no mês de:",options:["julho","abril","fevereiro","setembro","dezembro"],correct:2,exp:"<strong>Fevereiro</strong> é o pico da estiagem, com umidade relativa abaixo de 60%."},
+{q:"O fenômeno La Niña, oposto ao El Niño, tende a provocar em Roraima:",options:["Redução drástica das chuvas e seca severa.","Aumento das chuvas e potencialização das cheias.","Diminuição da umidade relativa do ar.","Enfraquecimento da ZCIT.","Maior incidência de queimadas."],correct:1,exp:"<strong>La Niña</strong> aumenta as chuvas e pode causar cheias no Rio Branco."},
+{q:"O microclima urbano de Boa Vista apresenta características de ilha de calor moderada. Isso significa que:",options:["A cidade é sempre mais fria que o entorno rural.","A área urbana registra temperaturas ligeiramente superiores às áreas rurais adjacentes, devido à concentração de asfalto e concreto.","Não há diferença térmica entre a cidade e o lavrado.","Boa Vista possui arranha-céus que bloqueiam os ventos.","O Rio Branco não influencia o clima urbano."],correct:1,exp:"Boa Vista forma uma <strong>ilha de calor moderada</strong>: asfalto e concreto elevam a temperatura em relação ao lavrado, mas o relevo plano e a ventilação evitam extremos."},
+{q:"As maiores amplitudes térmicas diárias em Roraima ocorrem na região do Lavrado, pois:",options:["Há grande cobertura de nuvens.","O solo arenoso retém umidade.","O lavrado perde calor rapidamente à noite devido à baixa umidade.","A altitude elevada resfria o ar.","A proximidade do Rio Branco aquece o ambiente."],correct:2,exp:"No lavrado, a <strong>baixa umidade</strong> permite rápida perda de calor noturno, gerando amplitudes térmicas diárias maiores."},
+{q:"A precipitação orográfica em Roraima ocorre de forma mais intensa:",options:["Nas planícies do lavrado.","No extremo norte e noroeste, nas serras e tepuis.","Às margens do Rio Branco.","No centro-sul do estado.","Em Boa Vista."],correct:1,exp:"A <strong>chuva orográfica</strong> é intensa nas serras do norte (Pacaraima, Monte Roraima), onde o ar úmido é forçado a subir."},
+{q:"Sobre as queimadas em Roraima, é correto afirmar que:",options:["Ocorrem exclusivamente por causas naturais.","São intensificadas em anos de La Niña.","São agravadas pela ausência da ZCIT e pela ação dos ventos alísios secos.","Não têm relação com o clima.","Ocorrem apenas no período chuvoso."],correct:2,exp:"As queimadas se agravam com a <strong>ausência da ZCIT</strong> e com os ventos alísios secos."}
+],
+solos:[
+{q:"A maior parte dos solos de Roraima é composta por Latossolos. Sobre suas características, é correto afirmar que:",options:["São rasos, pedregosos e de alta fertilidade.","São profundos, bem drenados, mas quimicamente pobres e ácidos.","Apresentam excesso de água e má drenagem.","São arenosos, com baixíssima retenção de água.","São ricos em matéria orgânica e naturalmente férteis."],correct:1,exp:"Os <strong>Latossolos</strong> são profundos, bem drenados, porém ácidos e de baixa fertilidade natural."},
+{q:"Os solos conhecidos como Espodossolos, associados às campinaranas, caracterizam-se por:",options:["Alta fertilidade e textura argilosa.","Presença de plintita e camadas endurecidas.","Textura arenosa, extrema acidez e pobreza de nutrientes, com horizonte de acumulação de matéria orgânica e alumínio em subsuperfície.","Excesso de água e coloração acinzentada.","Elevada capacidade de troca catiônica (CTC)."],correct:2,exp:"<strong>Espodossolos</strong> são arenosos, ácidos e pobres, típicos de campinaranas, com horizonte espódico endurecido."},
+{q:"Os Gleissolos, comuns em várzeas e áreas alagadiças de Roraima, apresentam como principal limitação:",options:["Baixa profundidade e rocha próxima à superfície.","Acidez extrema e toxidez por alumínio.","Excesso de água, que reduz a oxigenação e dificulta a mecanização.","Textura arenosa e baixa retenção de nutrientes.","Presença de plintita."],correct:2,exp:"<strong>Gleissolos</strong> são solos hidromórficos, com excesso de água e ambiente redutor, limitando o uso agrícola."},
+{q:"A correção química dos solos do lavrado, para viabilizar a agricultura mecanizada de soja e milho, consiste principalmente em:",options:["Irrigação constante.","Calagem (aplicação de calcário) e adubação fosfatada.","Drenagem profunda.","Plantio de espécies nativas.","Uso de queimadas controladas."],correct:1,exp:"A <strong>calagem</strong> corrige a acidez e o alumínio tóxico, essencial para o cultivo no lavrado."},
+{q:"Os Neossolos Quartzarênicos, encontrados no lavrado, são caracterizados por:",options:["Textura argilosa e alta fertilidade.","Textura arenosa, baixa retenção de água e nutrientes.","Excesso de água e coloração cinzenta.","Presença de plintita.","Alto teor de matéria orgânica."],correct:1,exp:"São <strong>solos arenosos</strong>, pobres e com baixíssima CTC, representando um desafio agrícola."},
+{q:"Nas várzeas do Rio Branco, os solos mais férteis são Gleissolos e Cambissolos, que recebem sedimentos aluviais. Isso lhes confere:",options:["Baixa capacidade de troca catiônica (CTC).","Elevada acidez e toxidez por alumínio.","Maior CTC e fertilidade natural elevada.","Textura arenosa.","Pouca profundidade."],correct:2,exp:"Os <strong>sedimentos aluviais</strong> recentes conferem a esses solos <strong>alta CTC</strong> e fertilidade natural."},
+{q:"O processo de gleização, que dá origem aos Gleissolos, ocorre devido a:",options:["Intemperismo químico intenso em clima seco.","Alternância entre umedecimento e secagem.","Ambiente anaeróbico, com redução do ferro e coloração acinzentada.","Acumulação de carbonato de cálcio.","Deposição de areia pelo vento."],correct:2,exp:"A <strong>gleização</strong> é a redução do ferro em ambiente sem oxigênio, gerando cores acinzentadas."},
+{q:"A classe de solo dominante em Roraima, cobrindo cerca de 60% do estado, é:",options:["Argissolos","Latossolos","Espodossolos","Neossolos Quartzarênicos","Gleissolos"],correct:1,exp:"Os <strong>Latossolos</strong> dominam aproximadamente 60% do território roraimense."},
+{q:"Plintossolos são caracterizados pela presença de plintita, que pode endurecer e formar uma camada restritiva. Esse endurecimento é favorecido pela:",options:["Adição de calcário.","Oscilação do lençol freático e exposição ao ar.","Fertilização química.","Plantio direto.","Cobertura vegetal densa."],correct:1,exp:"A <strong>oscilação do lençol freático</strong> provoca a segregação de ferro e formação de plintita, que endurece com a exposição."},
+{q:"Sobre os Argissolos em Roraima, é correto afirmar:",options:["São solos rasos e pedregosos.","Apresentam diferenciação textural entre horizontes e risco de erosão em áreas onduladas.","São arenosos e muito profundos.","Ocorrem exclusivamente em várzeas.","Possuem alta fertilidade natural."],correct:1,exp:"<strong>Argissolos</strong> têm gradiente textural e são suscetíveis à erosão, exigindo manejo conservacionista."},
+{q:"O Sistema de Plantio Direto (SPD) nos Latossolos do lavrado é vantajoso porque:",options:["Revolve profundamente o solo.","Aumenta a erosão hídrica.","Mantém a palhada, reduz a evaporação e protege contra o impacto das chuvas.","Dispensa a calagem.","Compacta o solo."],correct:2,exp:"O <strong>Plantio Direto</strong> mantém a palhada, reduz a evaporação e a erosão, sendo essencial no lavrado."},
+{q:"A principal limitação dos Neossolos Litólicos, encontrados em áreas serranas, é:",options:["Excesso de água.","Acidez elevada.","Pouca profundidade e risco de erosão.","Textura arenosa.","Baixa drenagem."],correct:2,exp:"<strong>Neossolos Litólicos</strong> são rasos, com rocha próxima, e suscetíveis à erosão."},
+{q:"Organossolos ocorrem em:",options:["Topos de serra.","Áreas brejosas, ricas em matéria orgânica.","Lavrado seco.","Campinaranas.","Planaltos."],correct:1,exp:"<strong>Organossolos</strong> são encontrados em áreas brejosas, com acúmulo de matéria orgânica."},
+{q:"A baixa fertilidade natural dos Latossolos amazônicos decorre principalmente do processo de:",options:["Adição de fertilizantes.","Lixiviação intensa provocada pelas chuvas.","Acumulação de matéria orgânica.","Vulcanismo recente.","Sedimentação fluvial."],correct:1,exp:"A <strong>lixiviação</strong> (lavagem de nutrientes) pelas chuvas constantes é a principal causa da pobreza química."},
+{q:"Os solos do lavrado, embora quimicamente pobres, apresentam bom potencial físico para a mecanização porque:",options:["São rasos e pedregosos.","São planos, profundos e bem drenados (Latossolos).","Retêm muita água.","São argilosos e férteis.","Apresentam plintita."],correct:1,exp:"Os <strong>Latossolos do lavrado</strong> são planos, profundos e bem drenados, favoráveis à mecanização."},
+{q:"A erosão hídrica nos solos de Roraima é agravada por:",options:["Chuvas bem distribuídas ao longo do ano.","Chuvas concentradas em curto período, sobre solos desprotegidos.","Relevo excessivamente plano.","Cobertura vegetal densa.","Baixa intensidade das chuvas."],correct:1,exp:"A <strong>concentração das chuvas</strong> em poucos meses, sobre solos expostos, intensifica a erosão."},
+{q:"A presença de alumínio tóxico nos solos ácidos de Roraima é corrigida por meio de:",options:["Irrigação.","Calagem.","Drenagem.","Adubação nitrogenada.","Plantio de leguminosas."],correct:1,exp:"A <strong>calagem</strong> neutraliza o alumínio tóxico e corrige a acidez."},
+{q:"Os Planossolos, que ocorrem em Roraima, têm como característica:",options:["Profundidade excessiva.","Boa drenagem.","Contraste textural e drenagem deficiente.","Alta fertilidade.","Textura arenosa."],correct:2,exp:"<strong>Planossolos</strong> apresentam contraste textural e drenagem deficiente, causando encharcamento."},
+{q:"A associação entre Espodossolos e Campinaranas ocorre porque:",options:["Espodossolos são férteis e sustentam florestas densas.","A pobreza química, o encharcamento sazonal e o endurecimento do horizonte subsuperficial selecionam uma vegetação especializada e de baixo porte.","Ambos ocorrem em áreas de várzea.","Ambos são formados por sedimentos aluviais.","Não há relação entre solo e vegetação."],correct:1,exp:"Os <strong>Espodossolos</strong> impõem condições extremas (pobreza, encharcamento/ seca) que favorecem as <strong>Campinaranas</strong>."},
+{q:"Os Nitossolos em Roraima são:",options:["Dominantes no lavrado.","Encontrados em áreas específicas e apresentam melhor fertilidade natural.","Solos arenosos e inférteis.","Típicos de várzeas.","Solos rasos de montanha."],correct:1,exp:"<strong>Nitossolos</strong> possuem ocorrência restrita e fertilidade relativamente melhor."}
+],
+regime_pluviometrico:[
+{q:"O regime pluviométrico de Roraima é fortemente sazonal. Sobre a distribuição anual das chuvas no estado, é correto afirmar:",options:["As chuvas são uniformes durante todo o ano.","A estação chuvosa concentra-se entre outubro e março.","A estação seca vai de abril a setembro.","O período chuvoso ocorre entre abril e setembro, com pico entre maio e agosto.","Não há diferença sazonal significativa."],correct:3,exp:"O período chuvoso ('inverno') concentra-se de <strong>abril a setembro</strong>, com pico em maio/agosto."},
+{q:"Os maiores volumes anuais de precipitação em Roraima ocorrem:",options:["No nordeste do estado.","No centro-leste.","No oeste, sudoeste e sul.","No lavrado.","Em Boa Vista."],correct:2,exp:"As regiões <strong>oeste, sudoeste e sul</strong> recebem os maiores índices pluviométricos (acima de 2200 mm)."},
+{q:"Em anos de El Niño, o total precipitado em Boa Vista pode ficar abaixo de 1000 mm, enquanto a média anual histórica (INMET) é de cerca de:",options:["800 mm","1608 mm","2000 mm","1200 mm","2500 mm"],correct:1,exp:"A média anual histórica em Boa Vista é de aproximadamente <strong>1608 mm</strong> (INMET)."},
+{q:"O trimestre mais chuvoso no centro-norte de Roraima é:",options:["Janeiro, Fevereiro, Março","Maio, Junho, Julho","Outubro, Novembro, Dezembro","Agosto, Setembro, Outubro","Março, Abril, Maio"],correct:1,exp:"O trimestre <strong>maio, junho e julho</strong> concentra as maiores chuvas."},
+{q:"A ZCIT atinge sua posição mais ao norte sobre Roraima geralmente em:",options:["Dezembro/Janeiro","Março/Abril","Julho/Agosto","Outubro/Novembro","Fevereiro/Março"],correct:2,exp:"A ZCIT está mais ao norte por volta de <strong>julho/agosto</strong>, trazendo chuvas."},
+{q:"O mês de fevereiro é tipicamente o mais seco em Roraima porque:",options:["A ZCIT está sobre o estado.","É o pico da estiagem, com a ZCIT deslocada para o sul e baixa umidade relativa.","Há maior evapotranspiração.","Ocorrem muitas queimadas.","Os ventos alísios trazem umidade do Atlântico."],correct:1,exp:"Em fevereiro, a <strong>ZCIT está ao sul</strong> e a umidade relativa é mínima (<60%)."},
+{q:"Sobre a distribuição espacial das chuvas, o extremo sudoeste de Roraima diferencia-se por:",options:["Ser a área mais seca do estado.","Não apresentar estação seca bem definida.","Ter precipitação média inferior a 800 mm/ano.","Ser dominado pelo clima Aw.","Apresentar savanas."],correct:1,exp:"O <strong>extremo sudoeste</strong> é a exceção ao padrão de seca, podendo não ter estação seca definida (clima Af/Am)."},
+{q:"A forte sazonalidade pluviométrica em Roraima influencia diretamente:",options:["Apenas a vegetação.","O calendário agrícola, o regime dos rios e o risco de queimadas.","Apenas o turismo.","Somente o abastecimento urbano.","Exclusivamente a fauna."],correct:1,exp:"A sazonalidade das chuvas afeta a <strong>agricultura, hidrologia e queimadas</strong>."},
+{q:"Durante a estação chuvosa, a direção predominante dos ventos em Roraima é:",options:["Sul e Sudeste","Norte e Noroeste","Nordeste e Leste","Oeste e Sudoeste","Leste e Sudeste"],correct:2,exp:"Os ventos alísios de <strong>nordeste/leste</strong> predominam na estação chuvosa."},
+{q:"O fenômeno La Niña, em relação à pluviosidade em Roraima, tende a:",options:["Reduzir as chuvas.","Manter as chuvas na média.","Intensificar as chuvas e provocar cheias no Rio Branco.","Causar seca severa.","Diminuir a umidade."],correct:2,exp:"<strong>La Niña</strong> potencializa as chuvas e pode causar enchentes."},
+{q:"A transição climática em Roraima do sul para o centro/nordeste caracteriza-se por:",options:["Aumento da umidade.","Diminuição gradual da precipitação e surgimento do clima Aw (tropical de savana).","Homogeneidade pluviométrica.","Maior altitude.","Inexistência de estação seca."],correct:1,exp:"Do sul (úmido) para o centro/nordeste, as chuvas diminuem e surge o clima <strong>Aw</strong>."},
+{q:"O mês de transição seca-chuva, quando as chuvas começam a retornar em Roraima, é geralmente:",options:["Janeiro","Fevereiro","Março/Abril","Julho","Setembro"],correct:2,exp:"A transição da seca para a chuva ocorre por volta de <strong>março/abril</strong>."},
+{q:"A região de Rorainópolis, no sul do estado, apresenta índices pluviométricos superiores a 2200 mm/ano devido à:",options:["Proximidade com o hemisfério norte.","Influência da convergência úmida amazônica e clima Am/Af.","Altitude elevada.","Ventos secos do lavrado.","Ausência da ZCIT."],correct:1,exp:"O sul recebe influência direta da umidade amazônica, resultando em <strong>altos índices pluviométricos</strong>."},
+{q:"Em Boa Vista, a nebulosidade atinge seu mínimo no mês de:",options:["Junho","Agosto","Fevereiro","Abril","Novembro"],correct:2,exp:"<strong>Fevereiro</strong>, pico da seca, apresenta menor nebulosidade."},
+{q:"A evapotranspiração potencial em Roraima é mais elevada nos meses de:",options:["Maio e junho","Julho e agosto","Janeiro e fevereiro","Abril e maio","Setembro e outubro"],correct:2,exp:"Com alta temperatura, ventos e baixa umidade, a evapotranspiração é máxima em <strong>janeiro/fevereiro</strong>."},
+{q:"O aquecimento global tende a provocar em Roraima:",options:["Aumento das chuvas.","Encurtamento da estação seca.","Alongamento da estação seca e maior risco de queimadas.","Resfriamento geral.","Diminuição das temperaturas."],correct:2,exp:"Projeções indicam <strong>alongamento da estação seca</strong> em Roraima."},
+{q:"As chuvas frontais em Roraima são:",options:["Frequentes e intensas.","Praticamente inexistentes, pois frentes frias raramente atingem a região equatorial.","O principal mecanismo de precipitação.","Responsáveis pelas chuvas de inverno.","Comuns em Boa Vista."],correct:1,exp:"<strong>Chuvas frontais</strong> são raras em Roraima devido à localização equatorial."},
+{q:"A precipitação orográfica em Roraima decorre:",options:["Do encontro de massas de ar frio e quente.","Da ascensão forçada de ar úmido sobre as serras e tepuis do norte.","Da convecção diurna.","Do aquecimento do solo.","Da atuação da ZCIT."],correct:1,exp:"A <strong>chuva orográfica</strong> ocorre quando o ar úmido é forçado a subir as elevações do norte."},
+{q:"Em anos de El Niño, eventos extremos de seca podem reduzir a precipitação em Boa Vista para cerca de:",options:["1600 mm","2000 mm","800 mm","2500 mm","1200 mm"],correct:2,exp:"Em El Niño forte, a chuva pode cair para aproximadamente <strong>800 mm</strong>."},
+{q:"O regime pluviométrico de Roraima é considerado singular em relação ao restante da Amazônia porque:",options:["Chove mais que em qualquer outro estado.","A estação chuvosa ocorre no inverno astronômico.","A maior parte das chuvas concentra-se entre abril e setembro, diferindo do padrão do Pará e Amazonas.","Não há estação seca.","As chuvas são exclusivamente frontais."],correct:2,exp:"Roraima tem <strong>ciclo invertido</strong>: chuvas de abril a setembro, seca de outubro a março."}
+],
+hidrografia:[
+{q:"O principal eixo hidrográfico de Roraima é o rio Branco. Sobre sua formação, é correto afirmar que:",options:["Nasce na confluência dos rios Mucajaí e Catrimani.","É formado pela união dos rios Uraricoera e Tacutu.","Deságua diretamente no rio Amazonas.","Tem suas nascentes no Escudo das Guianas, na Venezuela.","É um rio de águas claras e sem sedimentos."],correct:1,exp:"O <strong>rio Branco</strong> resulta do encontro do <strong>Uraricoera com o Tacutu</strong>."},
+{q:"A bacia do rio Branco drena a maior parte de Roraima e sua foz está localizada na margem esquerda do:",options:["Rio Solimões","Rio Amazonas","Rio Negro","Rio Orinoco","Rio Jatapu"],correct:2,exp:"O rio Branco deságua no <strong>rio Negro</strong>, próximo a Barcelos-AM."},
+{q:"O rio que estabelece a fronteira natural entre o Brasil (Roraima) e a Guiana é o:",options:["Uraricoera","Branco","Tacutu","Mucajaí","Catrimani"],correct:2,exp:"O <strong>rio Tacutu</strong> forma a fronteira com a Guiana."},
+{q:"A Usina Hidrelétrica Jatapu, em operação no estado, está localizada na bacia do rio:",options:["Branco","Uraricoera","Anauá/Jatapu","Catrimani","Mucajaí"],correct:2,exp:"A <strong>PCH Jatapu</strong> situa-se na bacia do rio Anauá/Jatapu."},
+{q:"O regime do rio Branco acompanha o regime de chuvas. O período de cheias ocorre:",options:["De outubro a março.","De janeiro a abril.","De abril a setembro.","De agosto a novembro.","De maio a agosto."],correct:2,exp:"As cheias do rio Branco ocorrem na estação chuvosa, de <strong>abril a setembro</strong>."},
+{q:"A navegação no rio Branco enfrenta limitações sazonais porque:",options:["No período chuvoso, bancos de areia impedem o tráfego.","Na estação seca, surgem bancos de areia e o nível da água diminui, dificultando o transporte.","O rio congela no inverno.","Há excesso de embarcações.","O rio é muito estreito."],correct:1,exp:"Na <strong>seca (verão)</strong>, a vazante reduz o nível e expõe bancos de areia, limitando a navegação."},
+{q:"A conexão hidroviária mais importante para Roraima é:",options:["Rio Branco → Rio Solimões → Belém.","Rio Branco → Rio Negro → Manaus.","Rio Tacutu → Oceano Atlântico.","Rio Uraricoera → Venezuela.","Rio Jatapu → Amazonas."],correct:1,exp:"A principal rota é <strong>Rio Branco → Rio Negro → Manaus</strong>."},
+{q:"O rio Uraricoera, um dos formadores do rio Branco, nasce na:",options:["Serra do Tepequém.","Serra de Pacaraima.","Serra Parima, na fronteira com a Venezuela.","Depressão de Boa Vista.","Serra do Imeri."],correct:2,exp:"O <strong>Uraricoera</strong> nasce na <strong>Serra Parima</strong> (fronteira Brasil-Venezuela)."},
+{q:"Além do abastecimento e navegação, o rio Branco tem importância histórica porque:",options:["Foi a primeira hidrovia a receber navios transatlânticos.","Serviu como eixo de penetração colonial, pecuária e formação de Boa Vista.","Era usado exclusivamente para pesca.","Nunca teve relevância econômica.","Foi descoberto apenas no século XX."],correct:1,exp:"O rio Branco foi <strong>eixo de ocupação histórica</strong> e formação de Boa Vista."},
+{q:"O rio Mucajaí é um afluente importante do rio Branco e está associado a:",options:["Fronteira com a Guiana.","Projetos de energia e áreas agrícolas.","Nascentes na Serra do Tepequém.","Ser o maior rio do estado.","Deságue no Oceano Atlântico."],correct:1,exp:"O <strong>Mucajaí</strong> é relevante para agricultura e energia (PCH Jatapu)."},
+{q:"O fenômeno do 'lavrado' cria lagos temporários durante as cheias. Um exemplo famoso é:",options:["Lago de Caracaranã","Lago Paranoá","Lago de Tucuruí","Lago do Rio Negro","Lago de Itaipu"],correct:0,exp:"O <strong>Lago do Caracaranã</strong> é um conhecido ponto turístico formado em área de lavrado."},
+{q:"A hidrografia de Roraima pertence à Região Hidrográfica do:",options:["Tocantins","São Francisco","Rio Negro (Bacia Amazônica)","Paraná","Atlântico Norte"],correct:2,exp:"Roraima integra a <strong>Região Hidrográfica do Rio Negro</strong>."},
+{q:"O rio Catrimani está localizado na porção do estado:",options:["Norte","Leste","Oeste/Sudoeste","Centro","Sudeste"],correct:2,exp:"O <strong>Catrimani</strong> drena a porção oeste/sudoeste."},
+{q:"Durante as cheias, o transbordamento do rio Branco pode ser agravado por:",options:["Represamento pelo rio Negro cheio, dificultando o escoamento.","Baixa pluviosidade.","Ventos fortes.","Abertura de barragens.","Dragagem do rio."],correct:0,exp:"Quando o <strong>rio Negro também está cheio</strong>, ocorre um represamento que agrava as cheias no Branco."},
+{q:"O principal afluente da margem esquerda do rio Branco, drenando a região sudeste (Rorainópolis), é o:",options:["Mucajaí","Catrimani","Anauá","Tacutu","Uraricoera"],correct:2,exp:"O <strong>rio Anauá</strong> é o principal afluente da margem esquerda."},
+{q:"Até a abertura da BR-174 na década de 1970, o principal meio de acesso a Roraima era:",options:["Aéreo.","Ferroviário.","Hidroviário, pelo rio Branco.","Rodoviário pela BR-210.","Dutos."],correct:2,exp:"Antes da BR-174, o <strong>rio Branco</strong> era a principal via de transporte e comunicação."},
+{q:"A cor barrenta (branca) das águas do rio Branco deve-se:",options:["À poluição industrial.","Ao alto teor de sedimentos transportados das serras.","À presença de calcário.","À vegetação aquática.","Ao reflexo do céu."],correct:1,exp:"As águas 'brancas' são carregadas de <strong>sedimentos em suspensão</strong>."},
+{q:"O trecho do rio Branco entre Caracaraí e Boa Vista é de difícil navegação na seca devido a:",options:["Corredeiras e pedrais, conhecidos como 'estirão'.","Profundidade excessiva.","Largura muito reduzida.","Congelamento.","Fortes ventos."],correct:0,exp:"Na seca, o trecho apresenta <strong>pedrais e baixa profundidade</strong>."},
+{q:"Roraima é o único estado brasileiro não conectado ao Sistema Interligado Nacional (SIN). A hidrografia é vista como solução energética, com potencial hidrelétrico em rios como o:",options:["Tacutu","Branco (projeto Bem Querer)","Catrimani","Mucajaí","Anauá"],correct:1,exp:"O projeto da <strong>UHE Bem Querer</strong>, no rio Branco, é debatido como solução energética."},
+{q:"A bacia do rio Branco é considerada uma sub-bacia do sistema:",options:["Tocantins-Araguaia","Solimões-Amazonas","Orinoco","Prata","São Francisco"],correct:1,exp:"O rio Branco faz parte do sistema <strong>Solimões-Amazonas</strong>."}
+],
+relevo:[
+{q:"O ponto culminante de Roraima e o extremo setentrional do Brasil são, respectivamente:",options:["Monte Caburaí e Monte Roraima.","Monte Roraima e Monte Caburaí.","Serra de Pacaraima e Monte Roraima.","Serra do Tepequém e Monte Caburaí.","Monte Roraima e Serra do Imeri."],correct:1,exp:"<strong>Monte Roraima</strong> (2.734 m) é o mais alto; <strong>Monte Caburaí</strong> é o extremo norte do Brasil."},
+{q:"A Depressão de Boa Vista, importante feição do relevo roraimense, está associada:",options:["Às maiores altitudes do estado.","Ao lavrado e à ocupação urbana e agropecuária.","À planície do Rio Amazonas.","Ao Escudo das Guianas.","Às serras do norte."],correct:1,exp:"A <strong>Depressão de Boa Vista</strong> abriga o lavrado e a capital, com relevo plano a suave ondulado."},
+{q:"Os inselbergs são feições de relevo encontradas em Roraima que podem ser descritas como:",options:["Planícies alagadas.","Elevações isoladas, resistentes à erosão, em meio a áreas planas.","Vales profundos.","Cadeias montanhosas contínuas.","Planaltos sedimentares."],correct:1,exp:"<strong>Inselbergs</strong> são 'montes-ilhas' de rocha resistente em áreas aplainadas."},
+{q:"A Serra do Tepequém, em Roraima, sofreu intensa intervenção humana devido:",options:["À construção de hidrelétricas.","Ao garimpo de diamantes e ouro.","À agricultura intensiva.","À criação de gado.","Ao turismo sustentável."],correct:1,exp:"A <strong>Serra do Tepequém</strong> foi palco de intenso garimpo de diamantes e ouro."},
+{q:"O Monte Roraima é classificado geomorfologicamente como um:",options:["Inselberg granítico.","Tepuy, montanha tabular de arenito.","Domo cristalino.","Planalto basáltico.","Vulcão extinto."],correct:1,exp:"O Monte Roraima é um <strong>tepuy</strong>, meseta de arenito com topo plano."},
+{q:"As planícies fluviais do rio Branco caracterizam-se por:",options:["Relevo montanhoso.","Relevo plano a suave ondulado, formado por acumulação de sedimentos.","Presença de tepuis.","Rochas cristalinas expostas.","Cânions profundos."],correct:1,exp:"As <strong>planícies fluviais</strong> são áreas planas, com sedimentos aluviais."},
+{q:"A macroestrutura geológica que domina o subsolo de Roraima é o:",options:["Cinturão Orogênico do Atlântico.","Escudo das Guianas (Cráton das Guianas).","Bacia Sedimentar do Paraná.","Plataforma Continental.","Cadeia Andina."],correct:1,exp:"O <strong>Escudo das Guianas</strong> (pré-cambriano) embasa a geologia de RR."},
+{q:"O extremo sul de Roraima faz parte da unidade de relevo denominada:",options:["Planalto das Guianas.","Depressão da Amazônia Ocidental/Setentrional.","Serras do Sudeste.","Planície do Pantanal.","Planalto Central."],correct:1,exp:"O sul de RR integra a <strong>Depressão da Amazônia Setentrional</strong>."},
+{q:"A Serra da Lua, em Roraima, é um exemplo de:",options:["Tepuy.","Inselberg (relevo residual) granítico.","Planície aluvial.","Dobramento moderno.","Planalto sedimentar."],correct:1,exp:"A <strong>Serra da Lua</strong> é um inselberg granítico no lavrado."},
+{q:"Sobre o relevo de Roraima, é correto afirmar que:",options:["É totalmente plano.","Combina planaltos e serras ao norte, depressões no centro e pediplanos/planícies ao sul.","É dominado por montanhas de origem vulcânica.","Não há influência do relevo na hidrografia.","A altitude é uniforme em todo o estado."],correct:1,exp:"O relevo roraimense é diversificado, com <strong>planaltos ao norte, depressão central e pediplanos ao sul</strong>."},
+{q:"Os tepuis, como o Monte Roraima, são formações residuais de antigos planaltos, esculpidas pela erosão. Sua rocha predominante é:",options:["Granito","Arenito","Basalto","Calcário","Gnaisse"],correct:1,exp:"Os tepuis são formados por <strong>arenito</strong>."},
+{q:"O relevo plano do lavrado favorece:",options:["A formação de cânions.","A mecanização agrícola.","O acúmulo de neve.","A pecuária extensiva apenas.","A navegação fluvial."],correct:1,exp:"A topografia plana a suave ondulada do lavrado <strong>favorece a mecanização</strong>."},
+{q:"As áreas elevadas do norte de Roraima (Escudo das Guianas) funcionam como:",options:["Áreas de drenagem para o Orinoco.","Divisores de água e nascentes de rios que correm para o sul.","Planícies de inundação.","Sumidouros de rios.","Barreiras para ventos alísios."],correct:1,exp:"As serras ao norte são <strong>divisores de águas</strong> e nascentes dos rios que drenam para o sul."},
+{q:"Os pediplanos, encontrados no sudeste de Roraima, são:",options:["Montanhas elevadas.","Superfícies aplainadas e dissecadas pela erosão.","Planícies alagadas.","Áreas de acumulação de sedimentos.","Vulcões extintos."],correct:1,exp:"<strong>Pediplanos</strong> são relevos aplainados e dissecados."},
+{q:"O Monte Caburaí, extremo norte do Brasil, está localizado na fronteira com:",options:["Venezuela","Guiana","Suriname","Colômbia","Peru"],correct:1,exp:"O <strong>Monte Caburaí</strong> faz fronteira com a <strong>Guiana</strong>."},
+{q:"A altitude do Monte Roraima é de aproximadamente:",options:["1500 m","2000 m","2734 m","3000 m","1800 m"],correct:2,exp:"O Monte Roraima tem <strong>2.734 metros</strong> de altitude."},
+{q:"A formação de inselbergs no lavrado deve-se a:",options:["Deposição fluvial.","Erosão diferencial, onde rochas mais resistentes permanecem em meio às mais erodidas.","Atividade vulcânica.","Dobramentos recentes.","Sedimentação eólica."],correct:1,exp:"<strong>Erosão diferencial</strong> esculpe os inselbergs, deixando rochas duras expostas."},
+{q:"A planície do rio Branco é composta principalmente por:",options:["Rochas cristalinas.","Sedimentos aluviais recentes.","Derrames basálticos.","Arenitos antigos.","Calcários marinhos."],correct:1,exp:"As planícies fluviais são formadas por <strong>sedimentos aluviais</strong>."},
+{q:"A região do lavrado, do ponto de vista do relevo, é classificada predominantemente como:",options:["Planalto dissecado.","Depressão aplainada.","Cadeia montanhosa.","Planície costeira.","Serra."],correct:1,exp:"O lavrado ocupa uma <strong>depressão aplainada</strong> (Depressão de Boa Vista)."},
+{q:"A erosão que esculpiu o relevo de Roraima atuou sobre rochas muito antigas do Escudo das Guianas, datadas do:",options:["Quaternário","Terciário","Mesozoico","Pré-Cambriano","Paleozoico"],correct:3,exp:"O Escudo das Guianas é formado por rochas <strong>pré-cambrianas</strong> (mais de 540 milhões de anos)."}
+],
+economia:[
+{q:"A economia de Roraima historicamente é caracterizada pela forte dependência do setor público. Atualmente, porém, observa-se:",options:["Estagnação total.","Crescimento do agronegócio, especialmente soja e pecuária, diversificando a economia.","Industrialização acelerada.","Declínio do setor terciário.","Liderança na produção de petróleo."],correct:1,exp:"O <strong>agronegócio</strong> (soja, pecuária, arroz) desponta como setor dinâmico."},
+{q:"O Valor Bruto da Produção (VBP) de Roraima em 2025 foi liderado por:",options:["Minério de ferro.","Soja (R$ 843,6 milhões).","Petróleo.","Café.","Indústria automobilística."],correct:1,exp:"A <strong>soja</strong> liderou o VBP com R$ 843,6 milhões, seguida por bovinos e mandioca."},
+{q:"Boa Vista concentra a maior parte da atividade econômica estadual. Isso se deve, entre outros fatores:",options:["À existência de grandes indústrias.","À concentração de órgãos públicos, serviços, comércio e rede bancária.","À produção de grãos.","À mineração de ouro.","Ao turismo internacional."],correct:1,exp:"Boa Vista polariza a economia pelo <strong>setor de serviços e administração pública</strong>."},
+{q:"A BR-174 é considerada o 'cordão umbilical' da economia de Roraima porque:",options:["Liga o estado ao Suriname.","É a principal via de ligação terrestre com Manaus e a Venezuela, escoando a produção.","É uma ferrovia.","Atravessa a Guiana.","Foi construída no século XIX."],correct:1,exp:"A <strong>BR-174</strong> conecta Roraima a Manaus e à Venezuela, sendo vital para logística."},
+{q:"O setor terciário (serviços, comércio e administração pública) é o dominante na economia roraimense. Isso significa que:",options:["A indústria é o maior empregador.","A maior parte do PIB e dos empregos formais está nesse setor.","A agropecuária não existe.","O estado é autossuficiente em energia.","As exportações são o principal motor."],correct:1,exp:"O <strong>terciário</strong> é o setor dominante, impulsionado pelo funcionalismo e comércio."},
+{q:"Um dos principais gargalos históricos para o desenvolvimento econômico de Roraima é:",options:["Excesso de mão de obra qualificada.","Isolamento energético e dependência de termelétricas.","Proximidade com grandes mercados.","Malha ferroviária extensa.","Abundância de indústrias."],correct:1,exp:"A <strong>energia</strong> foi um gargalo, com dependência de termelétricas e da Venezuela."},
+{q:"A PCH Jatapu contribui para a economia de Roraima por meio da:",options:["Navegação fluvial.","Geração de energia elétrica.","Irrigação de lavouras.","Pesca comercial.","Abastecimento de água."],correct:1,exp:"A <strong>PCH Jatapu</strong> gera energia elétrica para o estado."},
+{q:"A agropecuária roraimense tem se expandido principalmente em áreas de:",options:["Serras.","Várzeas do Rio Branco.","Lavrado (savana).","Floresta densa.","Campinaranas."],correct:2,exp:"O <strong>lavrado</strong>, com relevo plano, é a principal frente de expansão da agropecuária."},
+{q:"Além da soja, a produção de ___________ também tem grande valor no VBP de Roraima:",options:["Café","Trigo","Mandioca (R$ 364,2 milhões)","Algodão","Cana-de-açúcar"],correct:2,exp:"A <strong>mandioca</strong> gerou R$ 364,2 milhões no VBP de 2025."},
+{q:"A balança comercial de Roraima tem se mantido superavitária, com destaque para exportações de:",options:["Manufaturados eletrônicos.","Grãos, derivados de soja e carne.","Petróleo bruto.","Minério de ferro.","Veículos."],correct:1,exp:"<strong>Soja e carne</strong> lideram as exportações."},
+{q:"A área de livre comércio de Boa Vista e Bonfim visa:",options:["Restrição à importação.","Incentivar o comércio e a industrialização com benefícios fiscais.","Aumentar a carga tributária.","Proibir o comércio exterior.","Isolar Roraima economicamente."],correct:1,exp:"As ALCs oferecem <strong>incentivos fiscais</strong> para atrair empresas e comércio."},
+{q:"O crescimento do PIB de Roraima entre 2019 e 2025 foi de cerca de:",options:["5%","42%","10%","100%","75%"],correct:1,exp:"O PIB cresceu aproximadamente <strong>42%</strong> nesse período, impulsionado pelo agronegócio."},
+{q:"O rebanho bovino de Roraima em 2024 ultrapassou:",options:["500 mil cabeças","1,2 milhão de cabeças","2 milhões","300 mil","800 mil"],correct:1,exp:"O rebanho bovino superou <strong>1,2 milhão de cabeças</strong> em 2024."},
+{q:"A certificação de área livre de febre aftosa sem vacinação, obtida em 2025, beneficia Roraima porque:",options:["Aumenta os custos de produção.","Abre mercados internacionais para a carne bovina.","Reduz o valor do gado.","Dificulta as exportações.","Não tem impacto econômico."],correct:1,exp:"O status sanitário <strong>abre mercados exigentes</strong> para a carne roraimense."},
+{q:"A economia do interior de Roraima depende fortemente de:",options:["Grandes indústrias.","Agropecuária, funcionalismo público e agricultura familiar.","Mineração de ferro.","Turismo de luxo.","Petróleo."],correct:1,exp:"O interior depende de <strong>agropecuária, setor público e agricultura familiar</strong>."},
+{q:"A integração lavoura-pecuária em Roraima tem como resultado:",options:["Aumento do desmatamento.","Melhoria da rentabilidade e da sustentabilidade das terras.","Redução da produtividade.","Expansão da pecuária extensiva sem melhoramento.","Diminuição da produção de grãos."],correct:1,exp:"A <strong>integração lavoura-pecuária</strong> aumenta a eficiência e a rentabilidade."},
+{q:"Os principais parceiros comerciais de Roraima no exterior são:",options:["China e Japão.","Venezuela e Guiana.","Estados Unidos e Canadá.","Argentina e Uruguai.","África do Sul e Angola."],correct:1,exp:"<strong>Venezuela e Guiana</strong> concentram mais de 50% da corrente de comércio exterior."},
+{q:"A disponibilidade de calcário no próprio estado (Uiramutã/Pacaraima) é importante para a agropecuária porque:",options:["Serve como combustível.","Reduz os custos da correção do solo (calagem).","É usado na alimentação do gado.","Substitui fertilizantes nitrogenados.","É exportado para a Europa."],correct:1,exp:"O <strong>calcário local</strong> barateia a correção da acidez do solo."},
+{q:"A BR-210 (Perimetral Norte) em Roraima tem função de:",options:["Ligação com a Venezuela.","Integração regional, embora com trechos precários.","Escoamento de soja para o porto de Santos.","Transporte ferroviário.","Acesso ao Oceano Pacífico."],correct:1,exp:"A <strong>BR-210</strong> visa a integração regional, mas não está totalmente pavimentada."},
+{q:"Afrase-chave que resume a economia atual de Roraima é:",options:["Industrializada e exportadora de manufaturados.","Dominada por serviços e administração pública, com agropecuária em franca expansão.","Baseada exclusivamente no garimpo.","Líder em tecnologia da informação.","Totalmente dependente da mineração."],correct:1,exp:"A economia combina <strong>setor público forte e agropecuária crescente</strong>."}
+],
+extrativismo:[
+{q:"O extrativismo mineral histórico em Roraima está fortemente ligado à exploração de:",options:["Ferro e manganês.","Ouro e diamante.","Calcário e basalto.","Urânio e nióbio.","Bauxita e cobre."],correct:1,exp:"<strong>Ouro e diamante</strong> foram os principais motores do garimpo histórico."},
+{q:"A Serra do Tepequém é conhecida historicamente pelo garimpo de:",options:["Ouro.","Diamantes.","Cassiterita.","Calcário.","Ferro."],correct:1,exp:"A <strong>Serra do Tepequém</strong> foi um polo de garimpo de <strong>diamantes</strong>."},
+{q:"O extrativismo vegetal que integrou Roraima à economia amazônica no século XIX foi o da:",options:["Castanha-do-pará.","Borracha.","Açaí.","Madeira.","Cacau."],correct:1,exp:"A <strong>borracha</strong> inseriu Roraima na economia extrativa regional."},
+{q:"A castanha-do-pará, como produto florestal não madeireiro, destaca-se em áreas como:",options:["Lavrado.","Jatapu.","Pacaraima.","Boa Vista.","Tepequém."],correct:1,exp:"A castanha é relevante na região do <strong>Jatapu</strong> e sul do estado."},
+{q:"O garimpo ilegal em Roraima causa graves impactos, entre os quais:",options:["Aumento da biodiversidade.","Desmatamento, contaminação por mercúrio e conflitos com povos indígenas.","Melhoria da qualidade da água.","Reflorestamento.","Criação de empregos formais."],correct:1,exp:"O garimpo ilegal gera <strong>danos ambientais e sociais severos</strong>."},
+{q:"A Terra Indígena mais afetada pelo garimpo ilegal em Roraima é a:",options:["Raposa Serra do Sol.","Yanomami.","São Marcos.","Waimiri-Atroari.","Manoki."],correct:1,exp:"A <strong>Terra Indígena Yanomami</strong> sofreu intensa invasão de garimpeiros."},
+{q:"O calcário extraído em Roraima é utilizado principalmente para:",options:["Joalheria.","Construção civil e correção de solo (calagem).","Combustível.","Produção de eletrônicos.","Alimentação animal."],correct:1,exp:"O <strong>calcário</strong> é essencial para a calagem e construção."},
+{q:"O extrativismo madeireiro em Roraima, para ser legal, exige:",options:["Autorização verbal do proprietário.","Planos de Manejo Florestal Sustentável aprovados pela FEMARH.","Nenhuma documentação.","Apenas pagamento de taxa.","Licença de garimpo."],correct:1,exp:"A madeira legal depende de <strong>Planos de Manejo</strong> aprovados."},
+{q:"A pesca esportiva em Roraima atrai turistas principalmente para a captura do:",options:["Tambaqui.","Pirarucu.","Tucunaré-Açu.","Pacu.","Dourado."],correct:2,exp:"O <strong>Tucunaré-Açu</strong> é o alvo da pesca esportiva."},
+{q:"O extrativismo de ouro em Roraima ocorre predominantemente na forma de:",options:["Mineração industrial subterrânea.","Garimpo, muitas vezes ilegal.","Lavra a céu aberto mecanizada.","Extração por dragas licenciadas.","Mineração em áreas urbanas."],correct:1,exp:"O ouro é extraído majoritariamente por <strong>garimpo</strong>, com altos índices de ilegalidade."},
+{q:"Além de ouro e diamante, Roraima possui potencial para extração de:",options:["Petróleo.","Carvão mineral.","Cassiterita (estanho).","Sal-gema.","Gás natural."],correct:2,exp:"A <strong>cassiterita</strong> (minério de estanho) é visada e alvo de apreensões."},
+{q:"A distinção entre extrativismo legal e ilegal é fundamental porque:",options:["Não há diferença prática.","O legal segue normas ambientais e pode ser sustentável; o ilegal é predatório.","O ilegal gera mais empregos.","O legal não existe em Roraima.","O ilegal é sempre artesanal."],correct:1,exp:"O <strong>extrativismo legal</strong> obedece leis e pode ser manejado."},
+{q:"O extrativismo do açaí em Roraima é majoritariamente:",options:["De plantações comerciais.","Extrativista nativo de áreas de baixada.","Importado do Pará.","Realizado em estufas.","Feito apenas por grandes empresas."],correct:1,exp:"O açaí é coletado de forma <strong>extrativista nativa</strong>."},
+{q:"Em 2025, operações federais na Terra Yanomami focaram em:",options:["Promover o turismo.","Fechar os rios Uraricoera e Mucajaí para bloquear o garimpo.","Construir hidrelétricas.","Expandir a agricultura.","Abrir novas estradas."],correct:1,exp:"As operações visaram <strong>bloquear o acesso</strong> de garimpeiros pelos rios."},
+{q:"Cerca de 80% do ouro ilegal apreendido pela PRF no Brasil em 2025 foi em:",options:["Pará.","Amazonas.","Roraima.","Amapá.","Mato Grosso."],correct:2,exp:"<strong>Roraima</strong> concentrou 80% das apreensões de ouro ilegal."},
+{q:"O extrativismo de terras raras em Roraima:",options:["Já está em plena operação.","Possui potencial, mas carece de regulamentação.","É a principal atividade econômica.","Foi proibido permanentemente.","Não existe."],correct:1,exp:"Há <strong>potencial</strong>, mas sem exploração comercial regulamentada."},
+{q:"A crise da borracha na Amazônia, no início do século XX, levou Roraima a buscar alternativas como:",options:["Indústria têxtil.","Pecuária e garimpo.","Produção de café.","Mineração de ferro.","Navegação de cabotagem."],correct:1,exp:"Com a crise da borracha, a <strong>pecuária e o garimpo</strong> ganharam força."},
+{q:"A contaminação por mercúrio decorrente do garimpo afeta:",options:["Apenas o solo.","Rios, peixes e populações humanas.","Somente a atmosfera.","Exclusivamente as plantas.","Apenas áreas urbanas."],correct:1,exp:"O mercúrio <strong>contamina ecossistemas aquáticos e humanos</strong>."},
+{q:"O extrativismo de buriti em Roraima é utilizado para:",options:["Combustível.","Óleos e doces artesanais.","Construção civil.","Ração animal.","Medicamentos sintéticos."],correct:1,exp:"O <strong>buriti</strong> fornece óleo e polpa para alimentos."},
+{q:"O principal dilema atual do extrativismo em Roraima é:",options:["Falta de recursos.","Conflito entre desenvolvimento econômico via mineração e preservação ambiental/indígena.","Excesso de tecnologia.","Baixa produtividade agrícola.","Inexistência de legislação."],correct:1,exp:"O debate gira em torno da <strong>regularização da mineração versus proteção socioambiental</strong>."}
+],
+agropecuaria:[
+{q:"Roraima consolidou-se como 'Nova Fronteira Agrícola do Norte' principalmente devido:",options:["À expansão da pecuária leiteira.","Ao cultivo de café.","À produção recorde de grãos, especialmente soja, no lavrado.","À mineração.","À industrialização."],correct:2,exp:"A <strong>soja</strong> e os grãos impulsionaram o estado como fronteira agrícola."},
+{q:"Em 2025, a área plantada de soja em Roraima atingiu aproximadamente:",options:["50 mil hectares","143 mil hectares","200 mil hectares","80 mil hectares","10 mil hectares"],correct:1,exp:"A soja ocupou cerca de <strong>143 mil hectares</strong>."},
+{q:"A pecuária bovina em Roraima é tradicionalmente associada:",options:["À região serrana.","Ao vale do rio Branco e ao lavrado.","Às áreas de floresta densa.","Ao extremo sul.","Às campinaranas."],correct:1,exp:"A pecuária está ligada à <strong>ocupação do vale do rio Branco</strong>."},
+{q:"O certificado de área livre de febre aftosa sem vacinação obtido em 2025 permite:",options:["Aumentar o consumo interno.","Exportar carne bovina para mercados mais exigentes.","Reduzir o rebanho.","Substituir a pecuária por soja.","Criar gado apenas para subsistência."],correct:1,exp:"O status sanitário <strong>abre mercados internacionais</strong> para a carne."},
+{q:"A piscicultura em Roraima destaca-se pela produção de:",options:["Salmão.","Tambaqui.","Bacalhau.","Truta.","Atum."],correct:1,exp:"O <strong>tambaqui</strong> é a principal espécie da piscicultura regional."},
+{q:"A cultura da mandioca em Roraima tem importância para:",options:["Exportação em larga escala.","Agricultura familiar e produção de farinha.","Indústria automobilística.","Mineração.","Produção de biocombustíveis."],correct:1,exp:"A mandioca é base da <strong>agricultura familiar</strong> e consumo local."},
+{q:"O arroz é uma cultura tradicional em Roraima, com destaque para os municípios de:",options:["Pacaraima e Uiramutã.","Bonfim e Normandia.","Caracaraí e Rorainópolis.","Mucajaí e Iracema.","Alto Alegre e Amajari."],correct:1,exp:"<strong>Bonfim e Normandia</strong> estão entre os produtores de arroz."},
+{q:"O Valor Bruto da Produção (VBP) da soja em Roraima em 2025 foi estimado em:",options:["R$ 200 milhões.","R$ 843,6 milhões.","R$ 1 bilhão.","R$ 500 milhões.","R$ 100 milhões."],correct:1,exp:"A soja gerou <strong>R$ 843,6 milhões</strong>."},
+{q:"A banana, importante na fruticultura roraimense, em 2025 teve VBP de aproximadamente:",options:["R$ 50 milhões.","R$ 251,1 milhões.","R$ 100 milhões.","R$ 400 milhões.","R$ 10 milhões."],correct:1,exp:"A banana alcançou <strong>R$ 251,1 milhões</strong> no VBP."},
+{q:"A integração lavoura-pecuária no lavrado permite:",options:["Uso exclusivo para pastagem.","Aumento da lotação animal e melhoria da rentabilidade.","Redução da produção de grãos.","Desmatamento da floresta.","Fim da soja."],correct:1,exp:"A <strong>integração</strong> eleva a produtividade e sustentabilidade."},
+{q:"Um dos diferenciais estratégicos da agropecuária de Roraima é:",options:["Proximidade com o porto de Santos.","Ciclo de chuvas invertido, que permite colheita na entressafra do Centro-Sul.","Clima frio.","Solos naturalmente férteis.","Abundância de mão de obra barata."],correct:1,exp:"O <strong>ciclo de chuvas</strong> diferenciado possibilita colher na entressafra nacional."},
+{q:"Em 2025, Roraima introduziu o plantio de:",options:["Café.","Algodão.","Cana-de-açúcar.","Trigo.","Uva."],correct:1,exp:"O <strong>algodão</strong> começou a ser plantado em 2025."},
+{q:"A correção do solo do lavrado com calcário local é um fator que:",options:["Aumenta o custo de produção.","Reduz drasticamente os custos da calagem.","Não faz diferença.","Prejudica a soja.","É proibida."],correct:1,exp:"O calcário de Uiramutã/Pacaraima <strong>barateia a correção</strong>."},
+{q:"A exportação de bovinos vivos de Roraima em 2025 teve como principal destino:",options:["Venezuela.","Amazonas (87%).","Guiana.","Pará.","Europa."],correct:1,exp:"O <strong>Amazonas</strong> foi o destino de 87% das exportações de gado."},
+{q:"O evento 'Abertura da Colheita da Soja' em Roraima simboliza:",options:["O declínio do agronegócio.","A pujança do setor agrícola, atraindo investidores e tecnologia.","A proibição da soja.","A crise econômica.","O foco na mineração."],correct:1,exp:"O evento demonstra a força do <strong>agronegócio</strong> no estado."},
+{q:"A agricultura familiar em Roraima concentra-se em culturas como:",options:["Soja e milho.","Mandioca, banana, hortaliças.","Algodão e café.","Trigo e cevada.","Cana e laranja."],correct:1,exp:"A <strong>mandioca e a banana</strong> são destaques da agricultura familiar."},
+{q:"O melhoramento genético e a integração lavoura-pecuária elevaram a lotação das pastagens de 1 para até:",options:["2 animais/ha.","4 animais/ha.","10 animais/ha.","6 animais/ha.","8 animais/ha."],correct:1,exp:"A lotação subiu para até <strong>4 animais por hectare</strong> em áreas tecnificadas."},
+{q:"O VBP dos bovinos em Roraima em 2025 foi de:",options:["R$ 200 milhões.","R$ 422,5 milhões.","R$ 600 milhões.","R$ 100 milhões.","R$ 800 milhões."],correct:1,exp:"Os bovinos geraram <strong>R$ 422,5 milhões</strong>."},
+{q:"A localização de Roraima favorece o escoamento para o hemisfério norte via:",options:["Porto de Santos.","Porto de Georgetown (Guiana).","Porto de Paranaguá.","Porto de Suape.","Porto de Itajaí."],correct:1,exp:"A proximidade com <strong>Georgetown</strong> facilita o acesso ao Caribe e Europa."},
+{q:"A safra recorde de grãos 2024/2025 em Roraima foi de:",options:["500 mil toneladas.","692 mil toneladas.","1 milhão de toneladas.","300 mil toneladas.","800 mil toneladas."],correct:1,exp:"A safra atingiu <strong>692 mil toneladas</strong> de grãos."}
+],
+mineracao:[
+{q:"A base geológica que confere a Roraima grande potencial mineral é:",options:["Bacia Sedimentar Amazônica.","Escudo das Guianas (Cráton das Guianas).","Plataforma Continental.","Cinturão Orogênico.","Dobramentos Terciários."],correct:1,exp:"O <strong>Escudo das Guianas</strong> abriga recursos minerais diversos."},
+{q:"Os principais minérios historicamente garimpados em Roraima são:",options:["Ferro e manganês.","Ouro e diamante.","Bauxita e cobre.","Calcário e basalto.","Urânio e nióbio."],correct:1,exp:"<strong>Ouro e diamante</strong> dominaram o garimpo histórico."},
+{q:"A cassiterita, minério de estanho, tem sido alvo de garimpo e apreensões em Roraima. Sua extração está frequentemente associada a:",options:["Grandes mineradoras legais.","Garimpo ilegal em áreas restritas.","Uso industrial exclusivo.","Exportação regulamentada.","Lavra em Boa Vista."],correct:1,exp:"A <strong>cassiterita</strong> aparece em contextos de garimpo ilegal."},
+{q:"O calcário é considerado o 'extrativismo positivo' de Roraima porque:",options:["É usado em joias.","Auxilia na correção do solo agrícola e é explorado legalmente.","É combustível.","Substitui o ouro.","Não gera impacto ambiental."],correct:1,exp:"O <strong>calcário</strong> é vital para a calagem e tem exploração legalizada."},
+{q:"Em 2026, as operações federais na Terra Yanomami resultaram em:",options:["Aumento do garimpo.","Redução de 99% das áreas de garimpo ativo.","Legalização total da mineração.","Expansão agrícola.","Construção de hidrelétricas."],correct:1,exp:"Houve <strong>queda de 99%</strong> nas áreas de garimpo ativo."},
+{q:"Cerca de 46% do território de Roraima é composto por terras indígenas. Isso implica que:",options:["A mineração é livre.","A mineração depende de autorização do Congresso Nacional e consulta às comunidades, o que ainda não foi regulamentado.","Não há potencial mineral.","Apenas o garimpo é permitido.","As terras são improdutivas."],correct:1,exp:"A mineração em TI requer <strong>regulamentação específica</strong> ainda pendente."},
+{q:"Os impactos do garimpo ilegal incluem:",options:["Geração de empregos formais.","Assoreamento de rios, contaminação por mercúrio e conflitos sociais.","Preservação ambiental.","Fortalecimento da agricultura.","Aumento do turismo."],correct:1,exp:"O garimpo ilegal causa <strong>danos ambientais e sociais</strong> graves."},
+{q:"A extração de ouro em Roraima é predominantemente de depósitos:",options:["Subterrâneos profundos.","Aluvionares (em rios).","Rochas vulcânicas.","Evaporíticos.","Marinhos."],correct:1,exp:"O ouro é extraído de <strong>aluviões</strong> (sedimentos de rios)."},
+{q:"Além do calcário, outro recurso mineral com potencial em Roraima, mas com exploração ainda não regulamentada, são:",options:["Petróleo.","Terras raras.","Carvão mineral.","Sal marinho.","Fosfato."],correct:1,exp:"<strong>Terras raras</strong> possuem potencial, mas aguardam regulamentação."},
+{q:"O 'dinheiro do garimpo' que antes circulava em Boa Vista:",options:["Continua dominando a economia.","Diminuiu, forçando o setor de serviços a se adaptar à economia do agronegócio.","Aumentou com a fiscalização.","É a principal fonte de renda da capital.","Nunca existiu."],correct:1,exp:"A repressão ao garimpo ilegal <strong>reduziu a circulação desse recurso</strong> na economia local."},
+{q:"O mercúrio usado no garimpo contamina principalmente:",options:["O ar.","Os rios, peixes e populações ribeirinhas.","O solo das serras.","As estradas.","As plantações."],correct:1,exp:"O mercúrio <strong>contamina ecossistemas aquáticos</strong> e entra na cadeia alimentar."},
+{q:"A Constituição brasileira exige, para mineração em terras indígenas:",options:["Apenas licença estadual.","Autorização do Congresso e consulta às comunidades, ainda não regulamentada.","Nenhuma exigência.","Apenas pagamento de royalties.","Proibição absoluta."],correct:1,exp:"A <strong>regulamentação</strong> ainda não foi aprovada, tornando a atividade ilegal."},
+{q:"O principal uso do calcário extraído em Roraima é:",options:["Joalheria.","Correção da acidez do solo (calagem).","Combustível.","Fabricação de vidro.","Eletrônicos."],correct:1,exp:"O calcário é usado na <strong>calagem</strong> para a agricultura."},
+{q:"Diamantes em Roraima estão associados historicamente à:",options:["Serra de Pacaraima.","Serra do Tepequém.","Serra do Imeri.","Serra da Lua.","Serra do Grande."],correct:1,exp:"A <strong>Serra do Tepequém</strong> é conhecida pelos diamantes."},
+{q:"A redução do garimpo na TI Yanomami em 2025-2026 deveu-se a:",options:["Acordos com garimpeiros.","Bloqueio de rios e operações de fiscalização permanentes.","Legalização do garimpo.","Esgotamento do ouro.","Migração para a Guiana."],correct:1,exp:"O <strong>bloqueio logístico</strong> e a fiscalização reduziram drasticamente o garimpo."},
+{q:"A mineração de ________ é a única amplamente legalizada e em expansão em Roraima:",options:["Ouro.","Diamante.","Calcário.","Cassiterita.","Urânio."],correct:2,exp:"O <strong>calcário</strong> tem exploração legal e crescente."},
+{q:"O debate sobre a mineração em Roraima envolve:",options:["Apenas questões econômicas.","Conflitos entre desenvolvimento, direitos indígenas e proteção ambiental.","Unanimidade política.","Foco exclusivo na exportação.","Isenção de impostos."],correct:1,exp:"O tema é <strong>polêmico</strong>, envolvendo múltiplos interesses."},
+{q:"A Polícia Rodoviária Federal apreendeu em Roraima, em 2025, cerca de 80% de todo o ouro ilegal do Brasil. Isso demonstra:",options:["A baixa produção de ouro.","O peso do estado nas rotas do garimpo ilegal.","A legalidade da extração.","A inexistência de fiscalização.","O declínio do garimpo."],correct:1,exp:"Roraima é <strong>epicentro do garimpo ilegal</strong> no Brasil."},
+{q:"O urânio em Roraima:",options:["Já é minerado em larga escala.","Tem potencial, mas sem exploração significativa.","É a principal riqueza mineral.","Foi totalmente explorado.","É encontrado apenas na Guiana."],correct:1,exp:"O <strong>urânio</strong> possui potencial, mas sem exploração ativa."},
+{q:"A pressão política em Roraima para legalizar o garimpo artesanal contrasta com:",options:["A falta de interesse econômico.","A resistência de órgãos ambientais e de defesa indígena.","O apoio unânime da sociedade.","A ausência de legislação federal.","A proibição total do garimpo no Brasil."],correct:1,exp:"Há <strong>forte resistência</strong> de setores ambientalistas e indigenistas."}
+],
+industria:[
+{q:"A indústria em Roraima é caracterizada por:",options:["Grande diversificação e exportação de manufaturados.","Pequeno porte, baixa diversificação e concentração em Boa Vista.","Liderança no setor automobilístico.","Independência do setor público.","Produção de alta tecnologia."],correct:1,exp:"A indústria roraimense é <strong>pequena e concentrada</strong>."},
+{q:"O setor industrial que representa a maior parcela da atividade em Roraima é:",options:["Alimentos e bebidas.","Construção civil e Serviços Industriais de Utilidade Pública (SIUP).","Madeira e móveis.","Metalurgia.","Química."],correct:1,exp:"<strong>SIUP e construção civil</strong> somam cerca de 88% da indústria."},
+{q:"A agroindústria em Roraima é impulsionada principalmente por:",options:["Importação de insumos.","Beneficiamento de grãos (soja, milho, arroz) e processamento de carne.","Produção de eletrônicos.","Mineração.","Fabricação de veículos."],correct:1,exp:"A <strong>agroindústria</strong> agrega valor à produção primária."},
+{q:"O status de área livre de aftosa sem vacinação beneficia a indústria frigorífica porque:",options:["Reduz a qualidade da carne.","Abre mercados internacionais para a carne processada.","Aumenta os custos.","Diminui o rebanho.","Impõe barreiras sanitárias."],correct:1,exp:"A certificação <strong>facilita exportações</strong> de carne."},
+{q:"A construção civil em Boa Vista em 2026 passa por transformação com uso de:",options:["Taipa e palha.","Light Steel Frame e métodos construtivos a seco.","Apenas concreto armado.","Madeira não manejada.","Estruturas de ferro fundido."],correct:1,exp:"<strong>Light Steel Frame</strong> é tendência na construção civil."},
+{q:"O principal entrave energético para a indústria de Roraima historicamente foi:",options:["Excesso de hidrelétricas.","Isolamento do Sistema Interligado Nacional (SIN) e dependência de termelétricas.","Energia solar abundante.","Ventos fortes.","Conexão com a Guiana."],correct:1,exp:"Roraima <strong>não estava conectado ao SIN</strong>, dependendo de térmicas."},
+{q:"A Suframa estende benefícios fiscais para indústrias em Roraima localizadas:",options:["Apenas na capital.","Nas Áreas de Livre Comércio (Boa Vista e Bonfim).","Em todo o estado.","Exclusivamente no interior.","Somente na fronteira com a Venezuela."],correct:1,exp:"As <strong>ALCs</strong> recebem incentivos da Suframa."},
+{q:"Cerca de 75% das exportações industriais de Roraima são de:",options:["Eletrônicos.","Alimentos (soja, carne, derivados).","Minérios.","Veículos.","Plásticos."],correct:1,exp:"A <strong>agroindústria</strong> domina as exportações industriais."},
+{q:"A indústria de beneficiamento de arroz em Roraima abastece:",options:["Apenas o mercado local.","O Amazonas e a Venezuela, além do próprio estado.","Somente a Europa.","Exclusivamente Boa Vista.","Apenas a Guiana."],correct:1,exp:"O arroz abastece <strong>mercados regional e internacional</strong>."},
+{q:"O setor de Serviços Industriais de Utilidade Pública (SIUP) em Roraima abrange:",options:["Apenas construção.","Energia e saneamento.","Somente água.","Mineração.","Transporte."],correct:1,exp:"<strong>SIUP</strong> inclui energia e tratamento de água/resíduos."},
+{q:"A baixa industrialização de Roraima decorre, entre outros fatores, de:",options:["Mercado consumidor grande.","Baixa densidade demográfica, logística cara e gargalos energéticos.","Proximidade com centros industriais.","Muita mão de obra qualificada.","Inexistência de matéria-prima."],correct:1,exp:"<strong>Pequeno mercado e logística</strong> limitam a industrialização."},
+{q:"O potencial da agroindústria em Roraima está em:",options:["Eletrônicos.","Beneficiamento de grãos, frutas, pescado, carne e laticínios.","Siderurgia.","Petroquímica.","Automobilística."],correct:1,exp:"A <strong>agroindústria</strong> é o caminho para agregar valor."},
+{q:"O uso de biomassa e energia solar na indústria roraimense:",options:["É insignificante.","É uma tendência para superar gargalos energéticos.","Não é viável.","Aumenta a dependência de diesel.","Foi proibido."],correct:1,exp:"Fontes <strong>renováveis</strong> são alternativas para a matriz energética."},
+{q:"A indústria madeireira em Roraima, para ser legal, deve basear-se em:",options:["Desmatamento de qualquer área.","Planos de Manejo Florestal Sustentável.","Importação de madeira.","Uso de madeira de reservas indígenas sem autorização.","Corte raso."],correct:1,exp:"A madeira legal exige <strong>manejo sustentável</strong>."},
+{q:"Em março de 2026, a Suframa iniciou em Boa Vista uma jornada para:",options:["Fechar indústrias.","Interiorizar o desenvolvimento, com foco em projetos industriais e agroindustriais.","Reduzir incentivos fiscais.","Transferir indústrias para Manaus.","Paralisar a Zona Franca."],correct:1,exp:"A Suframa busca <strong>interiorizar</strong> o desenvolvimento industrial."},
+{q:"A participação da indústria de alimentos no total industrial de Roraima é de cerca de:",options:["46%","6,5%","25%","50%","80%"],correct:1,exp:"Alimentos representam aproximadamente <strong>6,5%</strong>."},
+{q:"A verticalização industrial em Roraima significa:",options:["Focar apenas na exportação de matérias-primas.","Transformar matérias-primas dentro do estado, agregando valor.","Importar todos os insumos.","Reduzir a produção.","Terceirizar a indústria."],correct:1,exp:"A <strong>verticalização</strong> agrega valor à produção local."},
+{q:"A indústria de calcário em Roraima está associada:",options:["À joalheria.","À construção civil e à correção de solo.","À produção de combustível.","À eletrônica.","À indústria têxtil."],correct:1,exp:"O calcário atende <strong>construção e agricultura</strong>."},
+{q:"A conexão de Roraima ao Linhão de Tucuruí visa:",options:["Aumentar a dependência da Venezuela.","Integrar o estado ao SIN e garantir segurança energética.","Reduzir a geração de energia.","Desligar as termelétricas sem alternativa.","Exportar energia para a Guiana."],correct:1,exp:"O <strong>Linhão</strong> conectará Roraima ao sistema nacional."},
+{q:"Afrase que resume a indústria roraimense é:",options:["Grande e diversificada.","Pequena, concentrada em Boa Vista, com destaque para construção civil, alimentos e madeira, limitada por energia e logística.","Líder nacional em tecnologia.","Baseada em mineração.","Inexistente."],correct:1,exp:"A indústria é <strong>incipiente</strong>, mas com potencial na agroindústria."}
+],
+comercio:[
+{q:"O comércio em Roraima é dominado pela cidade de:",options:["Rorainópolis.","Caracaraí.","Boa Vista.","Bonfim.","Pacaraima."],correct:2,exp:"<strong>Boa Vista</strong> é o principal polo comercial do estado."},
+{q:"O comércio roraimense historicamente dependeu do consumo gerado por:",options:["Indústrias.","Salários do funcionalismo público e programas sociais.","Turismo internacional.","Mineração de ferro.","Exportações de manufaturados."],correct:1,exp:"O <strong>setor público</strong> impulsiona o consumo local."},
+{q:"A BR-174 é vital para o comércio de Roraima porque:",options:["Liga o estado ao Suriname.","É a principal via de abastecimento terrestre, conectando a Manaus e à Venezuela.","É uma hidrovia.","Serve apenas para turismo.","Foi desativada."],correct:1,exp:"A <strong>BR-174</strong> é a principal artéria logística."},
+{q:"O município de Bonfim destaca-se no comércio devido:",options:["À produção industrial.","Ao comércio fronteiriço com a Guiana (Lethem).","À mineração.","À pesca.","À agricultura."],correct:1,exp:"<strong>Bonfim</strong> faz fronteira com a Guiana e tem comércio ativo."},
+{q:"Pacaraima é estratégica para o comércio por ser fronteira com a:",options:["Guiana.","Venezuela.","Suriname.","Colômbia.","Peru."],correct:1,exp:"<strong>Pacaraima</strong> é a porta de entrada para a <strong>Venezuela</strong>."},
+{q:"As Áreas de Livre Comércio (ALCs) em Boa Vista e Bonfim oferecem:",options:["Aumento de impostos.","Incentivos fiscais para atrair empresas e comércio.","Restrições à importação.","Proibição de vendas.","Monopólio estatal."],correct:1,exp:"As ALCs oferecem <strong>benefícios fiscais</strong>."},
+{q:"Em 2026, Roraima atingiu a marca de mais de US$ 2 bilhões em exportações acumuladas desde 2019, impulsionadas por:",options:["Petróleo.","Agronegócio e indústria de alimentos.","Minério de ferro.","Veículos.","Eletrônicos."],correct:1,exp:"<strong>Soja e alimentos</strong> lideram as exportações."},
+{q:"O comércio digital em Roraima em 2026 é marcado por:",options:["Estagnação.","Adoção de IA, chatbots e social commerce.","Proibição de vendas online.","Dependência exclusiva de lojas físicas.","Queda nas vendas."],correct:1,exp:"O <strong>varejo digital</strong> cresce com IA e redes sociais."},
+{q:"O município de Caracaraí tem importância comercial histórica ligada:",options:["À fronteira com a Venezuela.","Ao rio Branco e à circulação regional de mercadorias.","À produção de soja.","À mineração.","À indústria."],correct:1,exp:"<strong>Caracaraí</strong> é entreposto ribeirinho histórico."},
+{q:"A logística do comércio em Roraima enfrenta desafios como:",options:["Excesso de ferrovias.","Dependência da BR-174 e navegação sazonal no rio Branco.","Abundância de portos marítimos.","Rodovias duplicadas.","Proximidade de grandes centros."],correct:1,exp:"A <strong>dependência de rodovias e a sazonalidade</strong> são desafios."},
+{q:"O comércio com a Guiana tem se fortalecido visando o acesso ao:",options:["Porto de Caracaraí.","Porto de Georgetown.","Porto de Manaus.","Porto de Belém.","Porto de Santarém."],correct:1,exp:"<strong>Georgetown</strong> é a saída para o Caribe e Atlântico."},
+{q:"O setor terciário, que inclui o comércio, é o dominante em Roraima. Isso significa que:",options:["A indústria é o maior empregador.","A maior parte dos empregos e do PIB vem de serviços, comércio e administração pública.","A agricultura não tem importância.","O estado é autossuficiente.","Não há comércio exterior."],correct:1,exp:"O <strong>terciário</strong> é o setor predominante."},
+{q:"Os principais itens exportados por Roraima para Venezuela e Guiana são:",options:["Eletrônicos.","Alimentos como extrato de malte, açúcar, margarina, carnes e soja.","Veículos.","Minérios brutos.","Máquinas pesadas."],correct:1,exp:"<strong>Alimentos</strong> dominam as exportações aos vizinhos."},
+{q:"A nova lei estadual de incentivo ao comércio em Roraima (Lei n° 15.273/2025) foca em:",options:["Aumentar impostos.","Fortalecer produtores locais dentro das ALCs.","Fechar o comércio fronteiriço.","Proibir importações.","Restringir o varejo."],correct:1,exp:"A lei visa <strong>fortalecer a produção local</strong> nas ALCs."},
+{q:"O rio Branco, embora limitado pela sazonalidade, ainda é importante para o comércio porque:",options:["É uma via de transporte para cargas pesadas durante o ano todo.","Permite a navegação de balsas de combustível e mercadorias em certos períodos.","Substitui a BR-174.","É a única via de acesso.","Foi transformado em rodovia."],correct:1,exp:"A <strong>hidrovia</strong> complementa a logística, mas depende das cheias."},
+{q:"O comércio em Roraima está se transformando de 'balcão' para 'plataforma' devido:",options:["À diminuição do consumo.","À integração regional e digitalização (e-commerce, IA).","Ao fechamento das fronteiras.","À redução do PIB.","À falta de internet."],correct:1,exp:"A <strong>digitalização</strong> e o comércio exterior estão modernizando o setor."},
+{q:"Rorainópolis destaca-se no comércio como:",options:["Capital do estado.","Polo do sul, no eixo da BR-174.","Fronteira com a Venezuela.","Centro industrial.","Porto marítimo."],correct:1,exp:"<strong>Rorainópolis</strong> é polo regional no sul."},
+{q:"As compras governamentais e obras públicas impactam o comércio local porque:",options:["Não têm efeito.","Movimentam o consumo e a circulação de renda.","Reduzem o PIB.","Aumentam impostos.","Diminuem o emprego."],correct:1,exp:"<strong>Gastos públicos</strong> aquecem o comércio."},
+{q:"O social commerce (vendas por Instagram e TikTok) em Boa Vista:",options:["É proibido.","Reduziu as vendas.","Tornou-se canal relevante para pequenos lojistas.","Substituiu totalmente as lojas físicas.","É usado apenas por grandes redes."],correct:2,exp:"Pequenos negócios usam <strong>redes sociais</strong> para vender."},
+{q:"Afrase que resume o comércio roraimense é:",options:["Inexistente.","Dominado por Boa Vista, dependente da renda pública, articulado pela BR-174 e rio Branco, com crescente integração internacional.","Baseado na indústria.","Exclusivamente agrícola.","Focado no mercado interno apenas."],correct:1,exp:"O comércio é <strong>polarizado em Boa Vista</strong> e impulsionado pelo setor público e exportações."}
+]
+};
 
-    <script>
-        (function() {
-            // ==================== BANCO DE QUESTÕES (5 alternativas A-E) ====================
-            const questionBank = {
-                clima: [
-                    { q: "Qual é o tipo climático predominante em Roraima?", options: ["Tropical de altitude", "Equatorial", "Subtropical", "Semiárido", "Mediterrâneo"], correct: 1, exp: "Roraima apresenta clima predominantemente <strong>equatorial</strong>." },
-                    { q: "Qual região de Roraima apresenta clima equatorial úmido (Af), sem estação seca significativa?", options: ["Centro-leste", "Nordeste", "Oeste e sudoeste", "Norte", "Sudeste"], correct: 2, exp: "O tipo Af ocorre no <strong>oeste e sudoeste</strong>." },
-                    { q: "O tipo climático Aw (tropical de savana) está associado a qual região de Roraima?", options: ["Oeste", "Sudoeste", "Centro-leste e nordeste", "Noroeste", "Sul"], correct: 2, exp: "Aw predomina no <strong>centro-leste e nordeste</strong> (lavrado)." },
-                    { q: "Qual é a média anual de temperatura em Boa Vista?", options: ["Cerca de 22°C", "Cerca de 27°C", "Cerca de 30°C", "Cerca de 24°C", "Cerca de 26°C"], correct: 1, exp: "Boa Vista apresenta média anual em torno de <strong>27°C</strong>." },
-                    { q: "Como são chamados popularmente os períodos de chuva e seca em Roraima?", options: ["Verão e inverno", "Inverno e verão", "Primavera e outono", "Cheia e vazante", "Estiagem e alagamento"], correct: 1, exp: "<strong>'Inverno'</strong> (chuvas) e <strong>'verão'</strong> (seca)." },
-                    { q: "Qual fator NÃO influencia diretamente o clima de Roraima?", options: ["ZCIT", "Evapotranspiração da floresta", "Correntes marítimas do Atlântico Sul", "Relevo", "Massa Equatorial Continental"], correct: 2, exp: "<strong>Correntes marítimas do Atlântico Sul</strong> não têm influência direta." },
-                    { q: "Qual fenômeno climático tende a reduzir as chuvas em Roraima?", options: ["La Niña", "El Niño", "Friagem", "Onda de calor", "Monção"], correct: 1, exp: "<strong>El Niño</strong> reduz chuvas e aumenta seca." },
-                    { q: "O lavrado existe principalmente devido a:", options: ["Falta total de chuva", "Má distribuição anual da precipitação", "Solos extremamente férteis", "Altitude elevada", "Proximidade do mar"], correct: 1, exp: "Má distribuição: chove muito em poucos meses e seca prolongada." },
-                    { q: "Qual é o período da estação chuvosa em Roraima?", options: ["Outubro a março", "Janeiro a junho", "Abril a setembro", "Agosto a dezembro", "Maio a outubro"], correct: 2, exp: "Chuvas de <strong>abril a setembro</strong>." },
-                    { q: "O que são 'rios voadores'?", options: ["Rios que secam", "Correntes de ar que transportam vapor d'água da floresta", "Nuvens estáticas", "Ventos alísios", "Chuvas torrenciais"], correct: 1, exp: "Fluxos de vapor d'água da evapotranspiração." },
-                    { q: "Em quais meses ocorre a estação seca em Roraima?", options: ["Abril a setembro", "Outubro a março", "Maio a agosto", "Novembro a fevereiro", "Janeiro a maio"], correct: 1, exp: "Seca de <strong>outubro a março</strong>." },
-                    { q: "Qual região pode não apresentar estação seca bem definida?", options: ["Nordeste", "Centro-leste", "Extremo sudoeste", "Norte", "Sudeste"], correct: 2, exp: "O <strong>extremo sudoeste</strong> é a exceção." },
-                    { q: "Qual massa de ar influencia o clima de Roraima?", options: ["Massa Equatorial Continental", "Massa Polar Atlântica", "Massa Tropical Atlântica", "Massa Equatorial Atlântica", "Massa Polar Continental"], correct: 0, exp: "<strong>Massa Equatorial Continental</strong> (quente e úmida)." },
-                    { q: "Como o desmatamento afeta o clima local?", options: ["Aumenta a umidade", "Reduz a temperatura", "Diminui a evapotranspiração e enfraquece as chuvas", "Fortalece os ventos", "Atrai mais nuvens"], correct: 2, exp: "Reduz a reciclagem de umidade." },
-                    { q: "A ZCIT é formada pelo encontro de:", options: ["Ventos alísios", "Massas polares", "Brisas marítimas", "Correntes de jato", "Frentes frias"], correct: 0, exp: "<strong>Ventos alísios</strong> próximos ao Equador." },
-                    { q: "Nas áreas serranas do norte, as temperaturas são:", options: ["Mais altas", "Mais baixas", "Iguais a Boa Vista", "Extremamente variáveis", "Congelantes"], correct: 1, exp: "Altitude reduz as temperaturas." },
-                    { q: "O tipo climático Am caracteriza-se por:", options: ["Seco o ano todo", "Úmido com curta estação seca", "Desértico", "Frio de montanha", "Semiárido"], correct: 1, exp: "<strong>Am</strong>: úmido com curta estação seca." },
-                    { q: "Frase que resume o clima de Roraima:", options: ["Frio e seco", "Quente, equatorial/tropical, chuvas de abril a setembro", "Temperado", "Semiárido", "Mediterrâneo"], correct: 1, exp: "Quente, com sazonalidade marcante." },
-                    { q: "Além do El Niño, qual fenômeno aumenta as chuvas?", options: ["Furacões", "La Niña", "Monções", "Tornados", "Ondas de calor"], correct: 1, exp: "<strong>La Niña</strong> favorece umidade." },
-                    { q: "Por que o nordeste tem mais queimadas?", options: ["Maior altitude", "Seca mais prolongada e lavrado", "Excesso de chuvas", "Solos férteis", "Ventos fortes"], correct: 1, exp: "Seca longa + vegetação de savana." }
-                ],
-                solos: [
-                    { q: "Característica química da maioria dos solos de Roraima:", options: ["Alta fertilidade", "Alcalinidade", "Baixa fertilidade e acidez elevada", "Excesso de calcário", "Neutros"], correct: 2, exp: "<strong>Baixa fertilidade, acidez</strong> e alumínio." },
-                    { q: "Solos profundos e bem drenados no lavrado:", options: ["Gleissolos", "Latossolos", "Neossolos Litólicos", "Espodossolos", "Planossolos"], correct: 1, exp: "<strong>Latossolos</strong>." },
-                    { q: "Solos arenosos e pobres de campinaranas:", options: ["Nitossolos", "Latossolos", "Espodossolos", "Planossolos", "Cambissolos"], correct: 2, exp: "<strong>Espodossolos</strong> e Neossolos Quartzarênicos." },
-                    { q: "Solo típico de várzeas mal drenadas:", options: ["Latossolos", "Argissolos", "Gleissolos", "Neossolos Litólicos", "Plintossolos"], correct: 2, exp: "<strong>Gleissolos</strong> (excesso de água)." },
-                    { q: "Limitação comum dos Plintossolos:", options: ["Excesso de matéria orgânica", "Camadas endurecidas (plintita)", "Alta fertilidade", "Profundidade excessiva", "Textura arenosa"], correct: 1, exp: "<strong>Camadas endurecidas</strong>." },
-                    { q: "Neossolos Litólicos são:", options: ["Muito profundos", "Rasos, com rocha próxima", "Alta retenção de água", "Férteis", "Mal drenados"], correct: 1, exp: "<strong>Rasos</strong> e rochosos." },
-                    { q: "Importância dos Latossolos no lavrado:", options: ["Inférteis e inadequados", "Boas condições físicas para mecanização, exigem correção", "Naturalmente férteis", "Usados só para pastagem", "Alagadiços"], correct: 1, exp: "Boa física, mas ácidos." },
-                    { q: "Prática essencial para uso agrícola:", options: ["Irrigação constante", "Calagem e adubação", "Desmatamento total", "Queimadas", "Drenagem"], correct: 1, exp: "<strong>Calagem</strong> corrige acidez." },
-                    { q: "Organossolos ocorrem em:", options: ["Topos de serra", "Áreas brejosas com muita matéria orgânica", "Lavrado seco", "Planaltos", "Dunas"], correct: 1, exp: "Brejos e turfeiras." },
-                    { q: "Principal limitação dos Gleissolos:", options: ["Acidez extrema", "Excesso de água e má drenagem", "Pouca profundidade", "Salinidade", "Compactação"], correct: 1, exp: "<strong>Excesso de água</strong>." },
-                    { q: "No lavrado predominam:", options: ["Espodossolos", "Latossolos, Argissolos e Plintossolos", "Gleissolos", "Neossolos Litólicos", "Organossolos"], correct: 1, exp: "Latossolos, Argissolos e Plintossolos." },
-                    { q: "Neossolos Quartzarênicos têm:", options: ["Textura argilosa", "Textura arenosa e baixa retenção", "Alta fertilidade", "Plintita", "Camada orgânica"], correct: 1, exp: "Arenosos e pobres." },
-                    { q: "Planossolos apresentam:", options: ["Excesso de calcário", "Contraste textural e drenagem deficiente", "Muita profundidade", "Fertilidade alta", "Ausência de horizontes"], correct: 1, exp: "Drenagem ruim e contraste." },
-                    { q: "Solos com melhor fertilidade, mas raros:", options: ["Nitossolos", "Espodossolos", "Gleissolos", "Neossolos Litólicos", "Latossolos"], correct: 0, exp: "<strong>Nitossolos</strong> (restritos)." },
-                    { q: "Manejo técnico necessário:", options: ["Só irrigação", "Calagem, adubação, conservação", "Desmatamento", "Uso intensivo de agrotóxicos", "Nenhum"], correct: 1, exp: "Correção e conservação." },
-                    { q: "Diversidade de solos resulta de:", options: ["Apenas clima", "Clima, relevo, vegetação, geologia e hidrologia", "Só vegetação", "Só geologia", "Só ação humana"], correct: 1, exp: "Interação de fatores." },
-                    { q: "Em áreas de serra, solos comuns:", options: ["Latossolos profundos", "Neossolos Litólicos e Cambissolos", "Gleissolos", "Organossolos", "Espodossolos"], correct: 1, exp: "Rasos e pedregosos." },
-                    { q: "Elemento em excesso nos solos ácidos:", options: ["Cálcio", "Alumínio", "Potássio", "Magnésio", "Fósforo"], correct: 1, exp: "<strong>Alumínio</strong> tóxico." },
-                    { q: "Argissolos têm risco de:", options: ["Encharcamento", "Erosão em relevo ondulado", "Salinização", "Compactação", "Arenização"], correct: 1, exp: "<strong>Erosão</strong>." },
-                    { q: "Frase-chave dos solos:", options: ["Férteis e alcalinos", "Bom potencial físico no lavrado, mas ácidos e pobres", "Arenosos e inférteis", "Ricos em matéria orgânica", "Hidromórficos"], correct: 1, exp: "Potencial físico, dependentes de correção." }
-                ],
-                regime_pluviometrico: [
-                    { q: "Principal característica do regime de chuvas:", options: ["Uniformidade", "Forte sazonalidade e distribuição irregular", "Seca o ano todo", "Chuvas só no verão astronômico", "Monções"], correct: 1, exp: "<strong>Sazonalidade</strong> marcante." },
-                    { q: "Maior concentração de chuvas:", options: ["Outubro a março", "Janeiro a junho", "Abril a setembro", "Agosto a novembro", "Dezembro a maio"], correct: 2, exp: "Abril a setembro (inverno regional)." },
-                    { q: "Região mais chuvosa:", options: ["Nordeste", "Centro-leste", "Oeste, sudoeste e sul", "Norte", "Sudeste"], correct: 2, exp: "Oeste/sudoeste." },
-                    { q: "Região com seca mais prolongada:", options: ["Oeste", "Sudoeste", "Nordeste", "Sul", "Extremo sudoeste"], correct: 2, exp: "<strong>Nordeste</strong> (lavrado)." },
-                    { q: "Área sem estação seca definida:", options: ["Centro-leste", "Extremo sudoeste", "Nordeste", "Norte", "Sudeste"], correct: 1, exp: "Extremo sudoeste." },
-                    { q: "Influência da ZCIT:", options: ["Sempre inibe chuvas", "Favorece chuvas quando atua sobre o norte da América do Sul", "Não influencia", "Causa seca permanente", "Só atua no oceano"], correct: 1, exp: "Quando ativa, traz chuvas." },
-                    { q: "Nome regional do período seco:", options: ["Inverno", "Verão", "Primavera", "Outono", "Estiagem"], correct: 1, exp: "<strong>Verão</strong> regional." },
-                    { q: "Fator que NÃO influencia as chuvas:", options: ["Relevo", "Vegetação", "Marés oceânicas", "Circulação atmosférica", "ZCIT"], correct: 2, exp: "<strong>Marés oceânicas</strong>." },
-                    { q: "Padrão de Boa Vista:", options: ["Chuvas bem distribuídas", "Seca o ano todo", "Chuvas concentradas no inverno regional", "Chuvas de verão", "Clima desértico"], correct: 2, exp: "Inverno chuvoso, verão seco." },
-                    { q: "O que a chuva influencia diretamente?", options: ["Só vegetação", "Vegetação, rios, agricultura, calendário, queimadas", "Só abastecimento", "Só navegação", "Só turismo"], correct: 1, exp: "Múltiplos aspectos." },
-                    { q: "Fenômeno que aumenta chuvas:", options: ["El Niño", "La Niña", "Friagem", "Ondas de calor", "Ventos alísios"], correct: 1, exp: "<strong>La Niña</strong>." },
-                    { q: "Gradiente espacial das chuvas:", options: ["Mais no leste", "Mais no oeste/sudoeste, menos no centro-leste/nordeste", "Iguais", "Mais no norte", "Mais no sul"], correct: 1, exp: "Oeste úmido, leste seco." },
-                    { q: "Massa de ar influente:", options: ["Frentes frias", "Massa Equatorial Continental", "Ciclones", "Brisas", "Massa Tropical"], correct: 1, exp: "<strong>MEC</strong>." },
-                    { q: "Floresta e chuvas:", options: ["Não afeta", "Evapotranspiração libera vapor, formando nuvens", "Retém água apenas", "Impede nuvens", "Só influencia o solo"], correct: 1, exp: "Reciclagem de umidade." },
-                    { q: "Vazante dos rios:", options: ["Abril a setembro", "Outubro a março", "Maio a agosto", "Janeiro a abril", "Nunca"], correct: 1, exp: "Seca = vazante." },
-                    { q: "Região mais úmida:", options: ["Nordeste", "Centro-leste", "Extremo sudoeste", "Norte", "Sudeste"], correct: 2, exp: "Extremo sudoeste." },
-                    { q: "Rios voadores:", options: ["Rios transbordando", "Fluxos atmosféricos de vapor d'água", "Chuvas torrenciais", "Nuvens carregadas", "Ventos secos"], correct: 1, exp: "Transporte de umidade." },
-                    { q: "Posição equatorial favorece:", options: ["Baixas temperaturas", "Elevada incidência solar e chuvas convectivas", "Clima frio", "Secas", "Nevoeiros"], correct: 1, exp: "Calor e convecção." },
-                    { q: "Frase-chave:", options: ["Chuvas uniformes", "Chuvas concentradas abril-setembro, seca outubro-março, oeste mais úmido", "Seca permanente", "Chuvas só no litoral", "Monções"], correct: 1, exp: "Sazonalidade acentuada." },
-                    { q: "Importância para agricultura:", options: ["Nenhuma", "Define calendário produtivo e culturas", "Só irrigação", "Só pecuária", "Só extrativismo"], correct: 1, exp: "Calendário agrícola." }
-                ],
-                hidrografia: [
-                    { q: "Principal rio de Roraima:", options: ["Rio Negro", "Rio Amazonas", "Rio Branco", "Uraricoera", "Tacutu"], correct: 2, exp: "<strong>Rio Branco</strong>." },
-                    { q: "Formadores do Rio Branco:", options: ["Mucajaí e Catrimani", "Uraricoera e Tacutu", "Jatapu e Anauá", "Negro e Solimões", "Branco e Negro"], correct: 1, exp: "<strong>Uraricoera + Tacutu</strong>." },
-                    { q: "Deságua no:", options: ["Amazonas", "Solimões", "Rio Negro", "Jatapu", "Orinoco"], correct: 2, exp: "No <strong>Rio Negro</strong>." },
-                    { q: "Fronteira com a Guiana:", options: ["Rio Branco", "Rio Tacutu", "Mucajaí", "Catrimani", "Anauá"], correct: 1, exp: "<strong>Tacutu</strong>." },
-                    { q: "Cheias:", options: ["Outubro a março", "Janeiro a abril", "Abril a setembro", "Agosto a novembro", "Nunca"], correct: 2, exp: "Abril-setembro." },
-                    { q: "Importância histórica do Rio Branco:", options: ["Só pesca", "Eixo de penetração e formação de Boa Vista", "Só turismo", "Mineração", "Hidrelétricas"], correct: 1, exp: "Ocupação colonial." },
-                    { q: "PCH associada:", options: ["Mucajaí", "Jatapu", "Catrimani", "Anauá", "Uraricoera"], correct: 1, exp: "<strong>PCH Jatapu</strong>." },
-                    { q: "Limitação da navegação:", options: ["Chuvas", "Bancos de areia na seca", "Falta de barcos", "Correntezas", "Gelo"], correct: 1, exp: "Sazonalidade." },
-                    { q: "Conexão hidroviária:", options: ["Branco → Solimões", "Branco → Negro → Manaus", "Tacutu → Atlântico", "Uraricoera → Venezuela", "Jatapu → Amazonas"], correct: 1, exp: "Rota Manaus." },
-                    { q: "Bacia maior:", options: ["Tocantins", "Rio Negro (Amazônica)", "São Francisco", "Paraná", "Platina"], correct: 1, exp: "Região Hidrográfica do Rio Negro." },
-                    { q: "Afluente central:", options: ["Jatapu", "Catrimani", "Mucajaí", "Anauá", "Tacutu"], correct: 2, exp: "<strong>Mucajaí</strong>." },
-                    { q: "Relevo norte:", options: ["Sem influência", "Nascentes e divisores de água", "Seca rios", "Inverte fluxo", "Só turismo"], correct: 1, exp: "Áreas elevadas." },
-                    { q: "Drenagem predominante:", options: ["Norte", "Sul (rio Branco → Negro)", "Leste", "Oeste", "Noroeste"], correct: 1, exp: "Para o sul." },
-                    { q: "Rio Catrimani:", options: ["Norte", "Oeste/sudoeste", "Leste", "Centro", "Sudeste"], correct: 1, exp: "Oeste/sudoeste." },
-                    { q: "Vazante:", options: ["Aumenta volume", "Cheias", "Redução de volume e bancos de areia", "Congelamento", "Inundações"], correct: 2, exp: "Secas nos rios." },
-                    { q: "Usos múltiplos:", options: ["Só lazer", "Pesca, transporte, turismo, energia, ecossistemas", "Só mineração", "Só agricultura", "Só irrigação"], correct: 1, exp: "Diversos." },
-                    { q: "Jatapu região:", options: ["Norte", "Sudeste", "Oeste", "Centro", "Nordeste"], correct: 1, exp: "Sudeste." },
-                    { q: "Sequência correta:", options: ["Uraricoera+Tacutu→Branco→Negro→Amazonas", "Negro→Branco", "Tacutu→Negro", "Branco→Tacutu", "Uraricoera→Amazonas"], correct: 0, exp: "Uraricoera + Tacutu → Branco → Negro → Amazonas." },
-                    { q: "Afluentes do Branco:", options: ["Só Mucajaí", "Mucajaí, Catrimani, Anauá, Jatapu", "Só Negro", "Só Tacutu", "Só Uraricoera"], correct: 1, exp: "Vários afluentes." },
-                    { q: "Frase-chave:", options: ["Rios independentes", "Dominada pelo Rio Branco, formado por Uraricoera e Tacutu, indo para o Negro", "Rios para o Caribe", "Bacia do São Francisco", "Drenagem para o Pacífico"], correct: 1, exp: "Síntese hidrográfica." }
-                ],
-                relevo: [
-                    { q: "Ponto culminante:", options: ["Monte Caburaí", "Serra do Tepequém", "Monte Roraima", "Serra de Pacaraima", "Pico da Neblina"], correct: 2, exp: "<strong>Monte Roraima</strong> (~2734 m)." },
-                    { q: "Extremo norte do Brasil:", options: ["Monte Roraima", "Monte Caburaí", "Serra de Pacaraima", "Serra do Tepequém", "Oiapoque"], correct: 1, exp: "<strong>Monte Caburaí</strong>." },
-                    { q: "Depressão associada ao lavrado:", options: ["Planalto das Guianas", "Depressão de Boa Vista", "Planície do Rio Branco", "Serra de Pacaraima", "Planalto Central"], correct: 1, exp: "<strong>Depressão de Boa Vista</strong>." },
-                    { q: "Maiores altitudes em:", options: ["Sul", "Centro", "Norte, noroeste e nordeste", "Sudeste", "Sudoeste"], correct: 2, exp: "Fronteiras com Venezuela/Guiana." },
-                    { q: "Inselbergs são:", options: ["Planícies alagadas", "Elevações isoladas resistentes à erosão", "Vales", "Rios encachoeirados", "Planaltos"], correct: 1, exp: "<strong>Relevos residuais</strong>." },
-                    { q: "Estrutura geológica do norte:", options: ["Bacia Sedimentar", "Escudo das Guianas", "Andes", "Plataforma Continental", "Cráton São Francisco"], correct: 1, exp: "<strong>Escudo das Guianas</strong>." },
-                    { q: "Planícies fluviais formadas por:", options: ["Erosão glacial", "Deposição de sedimentos", "Vulcanismo", "Dobramentos", "Ação eólica"], correct: 1, exp: "Sedimentação fluvial." },
-                    { q: "Relevo e hidrografia:", options: ["Sem relação", "Áreas elevadas são divisores e nascentes", "Só turismo", "Só mineração", "Só cavernas"], correct: 1, exp: "Divisores de água." },
-                    { q: "Sul e sudoeste predominam:", options: ["Serras elevadas", "Depressões, pediplanos e planícies", "Montanhas vulcânicas", "Planalto cristalino", "Cordilheiras"], correct: 1, exp: "Áreas rebaixadas." },
-                    { q: "Pediplanos:", options: ["Montanhas", "Superfícies aplainadas e dissecadas", "Vales", "Picos isolados", "Cânions"], correct: 1, exp: "Relevo aplainado." },
-                    { q: "Altitude do Monte Roraima:", options: ["1500 m", "2734 m", "3200 m", "2000 m", "1800 m"], correct: 1, exp: "Aproximadamente 2734 m." },
-                    { q: "Serra de Pacaraima:", options: ["Sul", "Fronteira norte (Venezuela/Guiana)", "Centro", "Sudeste", "Oeste"], correct: 1, exp: "Norte." },
-                    { q: "Centro de Roraima:", options: ["Planaltos elevados", "Depressões e lavrado", "Cordilheiras", "Planícies alagadas", "Escarpas"], correct: 1, exp: "Depressão com lavrado." },
-                    { q: "Terraços fluviais:", options: ["Topo de serras", "Margens de rios (sedimentação)", "Desertos", "Fundo oceânico", "Vulcões"], correct: 1, exp: "Níveis de sedimentação." },
-                    { q: "Distinção Roraima x Caburaí:", options: ["Iguais", "Roraima (alto); Caburaí (extremo norte)", "Caburaí mais alto", "Roraima na Venezuela", "Ambos na Guiana"], correct: 1, exp: "Altura vs ponto setentrional." },
-                    { q: "Sudeste:", options: ["Serras elevadas", "Pediplanos", "Planícies alagadas", "Vulcões", "Cânions"], correct: 1, exp: "<strong>Pediplanos</strong>." },
-                    { q: "Planícies fluviais sujeitas a:", options: ["Secas extremas", "Inundações periódicas", "Terremotos", "Erosão eólica", "Nevascas"], correct: 1, exp: "Cheias sazonais." },
-                    { q: "Relevo resulta de:", options: ["Só clima", "Estruturas antigas, erosão, sedimentação, clima e hidrografia", "Só vulcanismo", "Só ação humana", "Só terremotos"], correct: 1, exp: "Múltiplos fatores." },
-                    { q: "Serra do Tepequém:", options: ["Fronteira", "Garimpo histórico de diamantes", "Ponto culminante", "Extremo norte", "Capital"], correct: 1, exp: "Diamantes." },
-                    { q: "Frase-chave relevo:", options: ["Totalmente plano", "Planaltos/serras ao norte, depressão central, pediplanos ao sul", "Só montanhas", "Vulcânico", "Só planícies"], correct: 1, exp: "Diversidade de formas." }
-                ],
-                economia: [
-                    { q: "Setor dominante:", options: ["Primário", "Secundário", "Terciário (serviços e administração pública)", "Quaternário", "Agropecuário"], correct: 2, exp: "<strong>Terciário</strong>." },
-                    { q: "Cidade concentradora:", options: ["Rorainópolis", "Caracaraí", "Boa Vista", "Pacaraima", "Bonfim"], correct: 2, exp: "<strong>Boa Vista</strong>." },
-                    { q: "Setor dinâmico recente:", options: ["Indústria automobilística", "Agropecuária (soja, pecuária, piscicultura)", "Tecnologia", "Turismo de massa", "Mineração de ferro"], correct: 1, exp: "Agropecuária em expansão." },
-                    { q: "Principal rodovia:", options: ["BR-210", "BR-401", "BR-174", "BR-319", "BR-230"], correct: 2, exp: "<strong>BR-174</strong>." },
-                    { q: "Gargalo histórico:", options: ["Excesso de chuvas", "Isolamento energético e dependência de termelétricas", "Falta de terras", "População grande", "Muita indústria"], correct: 1, exp: "Energia." },
-                    { q: "Economia caracterizada por:", options: ["Industrialização forte", "Dependência do setor público e concentração em Boa Vista", "Exportação de manufaturados", "Mineração dominante", "Agricultura irrigada"], correct: 1, exp: "Setor público forte." },
-                    { q: "Setor com participação reduzida:", options: ["Serviços", "Comércio", "Indústria (secundário)", "Administração pública", "Educação"], correct: 2, exp: "<strong>Indústria</strong> pequena." },
-                    { q: "BR de integração regional:", options: ["BR-174", "BR-210", "BR-401", "BR-319", "BR-163"], correct: 1, exp: "<strong>BR-210</strong> (Perimetral Norte)." },
-                    { q: "Produto NÃO destaque agropecuário:", options: ["Soja", "Pecuária bovina", "Café em larga escala", "Piscicultura (tambaqui)", "Arroz"], correct: 2, exp: "Café não é destaque." },
-                    { q: "Interior depende de:", options: ["Grandes indústrias", "Agropecuária, agricultura familiar, funcionalismo", "Turismo internacional", "Mineração de ferro", "Petróleo"], correct: 1, exp: "Atividades primárias e setor público." },
-                    { q: "PCH Jatapu:", options: ["Navegação", "Geração de energia", "Irrigação", "Pesca", "Lazer"], correct: 1, exp: "Energia elétrica." },
-                    { q: "Limitação industrial:", options: ["Muita mão de obra", "Mercado pequeno e logística cara", "Excesso de energia", "Proximidade de centros", "Falta de água"], correct: 1, exp: "Custo e escala." },
-                    { q: "Programas sociais:", options: ["Irrelevantes", "Fundamentais para circulação de renda", "Só em Boa Vista", "Só na indústria", "Só na capital"], correct: 1, exp: "Injeção de recursos." },
-                    { q: "Grão tradicional:", options: ["Trigo", "Arroz", "Cevada", "Girassol", "Soja"], correct: 1, exp: "<strong>Arroz</strong>." },
-                    { q: "Posição estratégica:", options: ["Isolamento total", "Fronteira com Venezuela/Guiana e saída hidroviária para Manaus", "Litoral", "Fronteira com Argentina", "Pacífico"], correct: 1, exp: "Conexões regionais." },
-                    { q: "Construção civil pertence ao:", options: ["Primário", "Secundário", "Terciário", "Quaternário", "Extrativismo"], correct: 1, exp: "Setor secundário." },
-                    { q: "Transporte terrestre principal:", options: ["Ferrovias", "Rodovias (BR-174)", "Hidrovias", "Dutos", "Aéreo"], correct: 1, exp: "Rodoviário." },
-                    { q: "Dependência do setor público:", options: ["Indústria maior empregador", "Salários e órgãos públicos essenciais para renda", "Agricultura inexistente", "Comércio fechado", "Exportações altas"], correct: 1, exp: "Funcionalismo move economia." },
-                    { q: "NÃO é desafio:", options: ["Logística cara", "Mercado reduzido", "Abundância de indústrias diversificadas", "Dependência energética", "Baixa industrialização"], correct: 2, exp: "Não há abundância industrial." },
-                    { q: "Frase-chave economia:", options: ["Industrializada", "Dominada por serviços públicos, concentrada em Boa Vista, agropecuária em crescimento", "Só extrativismo", "Tecnológica", "Líder em exportação"], correct: 1, exp: "Serviços + agropecuária." }
-                ],
-                extrativismo: [
-                    { q: "Minérios históricos:", options: ["Ferro e manganês", "Ouro e diamante", "Calcário e basalto", "Urânio e nióbio", "Bauxita e cobre"], correct: 1, exp: "<strong>Ouro e diamante</strong>." },
-                    { q: "Serra do diamante:", options: ["Pacaraima", "Tepequém", "Imeri", "Mocidade", "Roraima"], correct: 1, exp: "<strong>Serra do Tepequém</strong>." },
-                    { q: "Produto que integrou Roraima à economia extrativa:", options: ["Castanha", "Borracha", "Açaí", "Madeira", "Piaçava"], correct: 1, exp: "<strong>Borracha</strong>." },
-                    { q: "Extrativismo não madeireiro sustentável:", options: ["Garimpo de ouro", "Coleta de castanha-do-pará", "Extração de diamantes", "Mineração de ferro", "Carvão"], correct: 1, exp: "<strong>Castanha</strong>." },
-                    { q: "Impactos do garimpo ilegal:", options: ["Só benefícios", "Desmatamento, mercúrio, conflitos indígenas", "Turismo", "Melhoria da água", "Aumento da biodiversidade"], correct: 1, exp: "Danos socioambientais." },
-                    { q: "Terra Indígena afetada:", options: ["Raposa Serra do Sol", "Yanomami", "São Marcos", "Waimiri-Atroari", "Manoki"], correct: 1, exp: "<strong>Yanomami</strong>." },
-                    { q: "Recurso NÃO associado:", options: ["Ouro", "Diamante", "Petróleo em larga escala", "Estanho", "Cobre"], correct: 2, exp: "Petróleo não é destaque." },
-                    { q: "Extrativismo madeireiro associado a:", options: ["Colonização e rodovias", "Só áreas urbanas", "Reservas indígenas", "Mineração", "Pesca"], correct: 0, exp: "Expansão da fronteira." },
-                    { q: "Diferença legal x ilegal:", options: ["Nenhuma", "Legal: manejado e sustentável; ilegal: predatório", "Ilegal é melhor", "Legal não existe", "Ilegal gera mais empregos"], correct: 1, exp: "Manejo vs degradação." },
-                    { q: "Crise da borracha favoreceu:", options: ["Mais borracha", "Pecuária e garimpo", "Industrialização", "Turismo", "Soja"], correct: 1, exp: "Alternativas econômicas." },
-                    { q: "Mineração associada ao:", options: ["Bacia Sedimentar", "Escudo das Guianas", "Andes", "Plataforma", "Pantanal"], correct: 1, exp: "Escudo antigo." },
-                    { q: "Outro minério no potencial:", options: ["Petróleo", "Carvão", "Cobre", "Sal", "Diamante"], correct: 2, exp: "<strong>Cobre</strong>." },
-                    { q: "Extrativismo vegetal não madeireiro inclui:", options: ["Só madeira", "Borracha, castanha, açaí, óleos", "Só minérios", "Só pesca", "Só carne"], correct: 1, exp: "Produtos florestais." },
-                    { q: "Importância histórica:", options: ["Nenhuma", "Ocupação do território e integração econômica", "Só exportação", "Só subsistência", "Só científica"], correct: 1, exp: "Formação territorial." },
-                    { q: "Mercúrio no garimpo:", options: ["Fertiliza", "Contamina rios, peixes e pessoas", "Aumenta biodiversidade", "Sem impacto", "Purifica água"], correct: 1, exp: "Tóxico." },
-                    { q: "Calcário uso:", options: ["Joias", "Construção civil e correção de solo", "Combustível", "Eletrônicos", "Alimentos"], correct: 1, exp: "Calagem e construção." },
-                    { q: "Castanha sustentável:", options: ["Uso de mercúrio", "Manejo sem derrubar a árvore", "Queimadas", "Desmatamento", "Mineração"], correct: 1, exp: "Coleta manejada." },
-                    { q: "Região da castanha:", options: ["Lavrado", "Jatapu", "Pacaraima", "Boa Vista", "Tepequém"], correct: 1, exp: "<strong>Jatapu</strong>." },
-                    { q: "Madeira ilegal causa:", options: ["Benefícios", "Desmatamento e perda de biodiversidade", "Aumento da umidade", "Fortalecimento fiscal", "Reflorestamento"], correct: 1, exp: "Degradação." },
-                    { q: "Frase-chave extrativismo:", options: ["Só mineração", "Combina importância histórica com conflitos socioambientais", "Inexistente", "Base industrial", "Só madeira"], correct: 1, exp: "História e conflitos." }
-                ],
-                agropecuaria: [
-                    { q: "Cultura em expansão no lavrado:", options: ["Café", "Soja", "Trigo", "Algodão", "Cana"], correct: 1, exp: "<strong>Soja</strong>." },
-                    { q: "Atividade tradicional do vale do Rio Branco:", options: ["Piscicultura", "Pecuária bovina", "Soja", "Fruticultura", "Mineração"], correct: 1, exp: "<strong>Pecuária</strong>." },
-                    { q: "Município NÃO associado à soja:", options: ["Alto Alegre", "Bonfim", "Pacaraima", "Cantá", "Boa Vista"], correct: 2, exp: "Pacaraima." },
-                    { q: "Mandioca importante para:", options: ["Exportação", "Agricultura familiar e farinha", "Automóveis", "Mineração", "Eletrônicos"], correct: 1, exp: "Consumo local." },
-                    { q: "Peixe destaque na piscicultura:", options: ["Salmão", "Tambaqui", "Bacalhau", "Truta", "Atum"], correct: 1, exp: "<strong>Tambaqui</strong>." },
-                    { q: "Fator que favorece mecanização:", options: ["Relevo plano a suave ondulado", "Solos férteis", "Clima frio", "Mão de obra", "Chuvas o ano todo"], correct: 0, exp: "Topografia favorável." },
-                    { q: "Pecuária bovina é:", options: ["Confinada", "Extensiva em pastagens", "Inexistente", "Só leiteira", "Industrial"], correct: 1, exp: "Extensiva." },
-                    { q: "Limitação dos solos:", options: ["Alta fertilidade", "Ácidos e pobres em nutrientes", "Excesso de calcário", "Textura argilosa", "Salinos"], correct: 1, exp: "Exigem correção." },
-                    { q: "Destaque pecuário:", options: ["Pacaraima", "Mucajaí", "Uiramutã", "Normandia", "Iracema"], correct: 1, exp: "<strong>Mucajaí</strong>." },
-                    { q: "Cultura tradicional no lavrado:", options: ["Soja", "Arroz", "Trigo", "Cevada", "Girassol"], correct: 1, exp: "<strong>Arroz</strong>." },
-                    { q: "Piscicultura aproveita:", options: ["Clima frio", "Condições amazônicas (água e temperatura)", "Altitude", "Solo fértil", "Ventos"], correct: 1, exp: "Ambiente favorável." },
-                    { q: "NÃO é desafio:", options: ["Logística", "Solos pobres", "Excesso de infraestrutura de transporte", "Questões ambientais", "Energia"], correct: 2, exp: "Infraestrutura precária." },
-                    { q: "Agricultura familiar:", options: ["Latifúndios", "Mandioca, farinha, milho, hortaliças", "Mineração", "Indústria têxtil", "Soja"], correct: 1, exp: "Pequena produção." },
-                    { q: "Destino do tambaqui:", options: ["Exportação Europa", "Mercados locais e regionais", "Farmácia", "Ração", "Combustível"], correct: 1, exp: "Consumo regional." },
-                    { q: "Correção do solo:", options: ["Irrigação", "Calagem e adubação fosfatada", "Desmatamento", "Queimadas", "Drenagem"], correct: 1, exp: "Calagem." },
-                    { q: "Arroz associado a:", options: ["Uiramutã", "Bonfim", "Iracema", "Caroebe", "Alto Alegre"], correct: 1, exp: "<strong>Bonfim</strong>." },
-                    { q: "Calendário agrícola ditado por:", options: ["Altitude", "Regime de chuvas (sazonalidade)", "Falta de sol", "Ventos", "Temperatura"], correct: 1, exp: "Estações chuvosa/seca." },
-                    { q: "Fruta tropical:", options: ["Maçã", "Banana", "Uva", "Morango", "Pera"], correct: 1, exp: "<strong>Banana</strong>." },
-                    { q: "Agropecuária enfrenta:", options: ["Falta de terras", "Infraestrutura, energia e regularização", "Excesso de mão de obra", "Clima desfavorável", "Muita chuva"], correct: 1, exp: "Desafios estruturais." },
-                    { q: "Frase-chave:", options: ["Só subsistência", "Cresce com soja, pecuária, arroz, mandioca, piscicultura; limitada por solos e logística", "Inexistente", "Líder em café", "Só extrativismo"], correct: 1, exp: "Potencial e gargalos." }
-                ],
-                mineracao: [
-                    { q: "Potencial mineral devido ao:", options: ["Bacia Sedimentar", "Escudo das Guianas", "Plataforma", "Andes", "Cadeia do Espinhaço"], correct: 1, exp: "Escudo antigo." },
-                    { q: "Garimpo histórico:", options: ["Ferro e cobre", "Ouro e diamante", "Calcário e basalto", "Urânio e nióbio", "Carvão"], correct: 1, exp: "<strong>Ouro e diamante</strong>." },
-                    { q: "Serra do garimpo de diamante:", options: ["Pacaraima", "Tepequém", "Imeri", "Mocidade", "Roraima"], correct: 1, exp: "<strong>Tepequém</strong>." },
-                    { q: "Contaminação do garimpo:", options: ["Fertilização", "Mercúrio", "Biodiversidade", "Reflorestamento", "Oxigenação"], correct: 1, exp: "<strong>Mercúrio</strong>." },
-                    { q: "Minério além de ouro/diamante:", options: ["Petróleo", "Carvão", "Estanho", "Sal", "Urânio"], correct: 2, exp: "<strong>Estanho</strong>." },
-                    { q: "Mineração legal:", options: ["Desmatamento ilegal", "Empregos e arrecadação", "Só conflitos", "Só impactos", "Inexistente"], correct: 1, exp: "Benefícios se regulada." },
-                    { q: "Terra Indígena impactada:", options: ["Raposa Serra do Sol", "Yanomami", "São Marcos", "Waimiri-Atroari", "Xingu"], correct: 1, exp: "<strong>Yanomami</strong>." },
-                    { q: "Ferro associado ao:", options: ["Sul", "Norte/noroeste (Escudo)", "Centro", "Sudeste", "Sudoeste"], correct: 1, exp: "Escudo das Guianas." },
-                    { q: "Diferença legal/ilegal:", options: ["Iguais", "Legal segue leis; ilegal é predatório", "Ilegal sustentável", "Legal não existe", "Ilegal gera mais renda"], correct: 1, exp: "Legislação." },
-                    { q: "Calcário uso:", options: ["Joias", "Construção civil e correção de solo", "Combustível", "Eletrônicos", "Alimentício"], correct: 1, exp: "Calagem." },
-                    { q: "Recurso NÃO listado:", options: ["Nióbio", "Zinco", "Petróleo", "Cobre", "Manganês"], correct: 2, exp: "Petróleo não." },
-                    { q: "Assoreamento:", options: ["Aumento profundidade", "Acúmulo de sedimentos", "Limpeza natural", "Fortalecimento margens", "Erosão"], correct: 1, exp: "Sedimentação." },
-                    { q: "Nióbio usado em:", options: ["Joias", "Ligas metálicas", "Combustível", "Eletrônicos", "Ração"], correct: 1, exp: "Metalurgia." },
-                    { q: "Rochas ornamentais:", options: ["Alimentação", "Revestimento e construção", "Medicina", "Tecnologia", "Agricultura"], correct: 1, exp: "Granito etc." },
-                    { q: "Urânio em Roraima:", options: ["Muito explorado", "Potencial, sem exploração significativa", "Inexistente", "Usado em fertilizante", "Principal minério"], correct: 1, exp: "Potencial." },
-                    { q: "Legislação aplicável:", options: ["Só municipal", "Ambiental, mineral e territorial", "Nenhuma", "Só federal", "Só estadual"], correct: 1, exp: "Arcabouço legal." },
-                    { q: "Conflito em terras indígenas:", options: ["Nenhum", "Fundiários, sociais, culturais", "Só econômicos", "Só políticos", "Só religiosos"], correct: 1, exp: "Múltiplos conflitos." },
-                    { q: "Basalto:", options: ["Joias", "Construção civil (brita)", "Eletrônicos", "Medicina", "Joalheria"], correct: 1, exp: "Pavimentação." },
-                    { q: "Quartzo:", options: ["Nenhum", "Eletrônicos e vidros", "Só joias", "Combustível", "Alimento"], correct: 1, exp: "Aplicações industriais." },
-                    { q: "Frase-chave mineração:", options: ["Inexistente", "Grande potencial no Escudo, ouro/diamante histórico, garimpo ilegal problemático", "Base da economia", "Só calcário", "Só ferro"], correct: 1, exp: "Potencial e conflitos." }
-                ],
-                industria: [
-                    { q: "Indústria roraimense é:", options: ["Grande e diversificada", "Pequena e concentrada em Boa Vista", "Inexistente", "Líder na Amazônia", "Exportadora"], correct: 1, exp: "Setor secundário reduzido." },
-                    { q: "Destaque industrial:", options: ["Automobilística", "Construção civil", "Tecnologia", "Química pesada", "Naval"], correct: 1, exp: "<strong>Construção civil</strong>." },
-                    { q: "Limitação principal:", options: ["Muita energia", "Mercado pequeno e logística cara", "Proximidade de centros", "Alta densidade", "Mão de obra farta"], correct: 1, exp: "Escala e custo." },
-                    { q: "Indústria alimentícia ligada a:", options: ["Importação", "Beneficiamento de produtos agropecuários locais", "Eletrônicos", "Mineração", "Petróleo"], correct: 1, exp: "Agroindústria." },
-                    { q: "Gargalo energético histórico:", options: ["Excesso de hidrelétricas", "Isolamento do SIN e termelétricas", "Energia solar abundante", "Ventos constantes", "Nuclear"], correct: 1, exp: "Dependência térmica." },
-                    { q: "Indústria madeireira:", options: ["Reflorestamento", "Exploração de madeira nativa e móveis", "Importação", "Só exportação", "Celulose"], correct: 1, exp: "Madeira regional." },
-                    { q: "Potencial de crescimento:", options: ["Aeroespacial", "Agroindústria (grãos, carne, pescado)", "Naval", "Siderurgia pesada", "Petroquímica"], correct: 1, exp: "Agroindústria." },
-                    { q: "Indústrias eletrointensivas dificultadas por:", options: ["Muita água", "Gargalos energéticos", "Mão de obra", "Clima frio", "Falta de terra"], correct: 1, exp: "Energia cara/instável." },
-                    { q: "Materiais de construção usam:", options: ["Insumos importados", "Matérias-primas regionais (calcário, basalto)", "Componentes eletrônicos", "Petróleo", "Aço importado"], correct: 1, exp: "Recursos locais." },
-                    { q: "Concentração industrial:", options: ["Rorainópolis", "Caracaraí", "Boa Vista", "Pacaraima", "Bonfim"], correct: 2, exp: "<strong>Boa Vista</strong>." },
-                    { q: "Baixa industrialização devido a:", options: ["Alta densidade", "Baixa densidade demográfica e mercado reduzido", "Excesso de rodovias", "Proximidade do mar", "Muitos portos"], correct: 1, exp: "Pequeno mercado." },
-                    { q: "BR-174 para indústria:", options: ["Irrelevante", "Principal via de escoamento/recebimento", "Só turismo", "Ferrovia", "Hidrovia"], correct: 1, exp: "Logística." },
-                    { q: "PCH Jatapu representa:", options: ["Obstáculo", "Fonte renovável que reduz dependência térmica", "Lazer", "Irrigação", "Navegação"], correct: 1, exp: "Energia limpa." },
-                    { q: "Móveis ligados a:", options: ["Importação de aço", "Madeira regional", "Plástico", "Tecnologia", "Couro"], correct: 1, exp: "Madeira." },
-                    { q: "Construção civil:", options: ["Alimentício", "Obras de infraestrutura", "Moveleiro", "Têxtil", "Químico"], correct: 1, exp: "Edificações." },
-                    { q: "Transformação de matérias-primas:", options: ["Importação de soja", "Beneficiamento de arroz, mandioca, frutas", "Chips", "Refino de petróleo", "Siderurgia"], correct: 1, exp: "Agroindústria." },
-                    { q: "Relação indústria-agropecuária:", options: ["Nenhuma", "Agroindústria agrega valor", "Concorrência", "Importação", "Subsistência"], correct: 1, exp: "Integração." },
-                    { q: "Termelétricas:", options: ["Energia eólica", "Queima de combustíveis (diesel/gás)", "Hidrelétricas", "Solar", "Nuclear"], correct: 1, exp: "Fósseis." },
-                    { q: "Integração ao SIN:", options: ["Isolamento", "Conexão à rede nacional, segurança energética", "Fim da energia", "Só solar", "Desligamento"], correct: 1, exp: "Interligação." },
-                    { q: "Frase-chave indústria:", options: ["Setor dominante", "Pequena, Boa Vista, construção civil e alimentos; limitada por energia e logística", "Exportadora", "Inexistente", "Líder em tecnologia"], correct: 1, exp: "Modesta." }
-                ],
-                comercio: [
-                    { q: "Polo comercial:", options: ["Rorainópolis", "Caracaraí", "Boa Vista", "Bonfim", "Pacaraima"], correct: 2, exp: "<strong>Boa Vista</strong>." },
-                    { q: "Motor do comércio no interior:", options: ["Indústrias", "Salários públicos e programas sociais", "Turismo", "Exportações", "Mineração"], correct: 1, exp: "Renda pública." },
-                    { q: "Rodovia vital:", options: ["BR-210", "BR-401", "BR-174", "BR-319", "BR-230"], correct: 2, exp: "<strong>BR-174</strong>." },
-                    { q: "Fronteira com Guiana:", options: ["Pacaraima", "Bonfim", "Normandia", "Uiramutã", "Amajari"], correct: 1, exp: "<strong>Bonfim</strong> (Lethem)." },
-                    { q: "Polo sul (BR-174):", options: ["Caracaraí", "Rorainópolis", "Cantá", "Mucajaí", "Iracema"], correct: 1, exp: "<strong>Rorainópolis</strong>." },
-                    { q: "Fronteira Venezuela:", options: ["Bonfim", "Pacaraima", "Amajari", "Alto Alegre", "Normandia"], correct: 1, exp: "<strong>Pacaraima</strong>." },
-                    { q: "Comércio pertence ao:", options: ["Primário", "Secundário", "Terciário", "Quaternário", "Extrativismo"], correct: 2, exp: "Setor terciário." },
-                    { q: "Limitação hidrovia:", options: ["Excesso de chuvas", "Vazante (bancos de areia)", "Falta de barcos", "Correntezas", "Congelamento"], correct: 1, exp: "Sazonalidade." },
-                    { q: "Histórico comercial:", options: ["Indústria têxtil", "Rio Branco, pecuária, borracha, garimpo", "Carvão", "Cana", "Soja"], correct: 1, exp: "Ciclos econômicos." },
-                    { q: "Boa Vista como redistribuidora:", options: ["Só turismo", "Distribui mercadorias para o interior", "Exporta para Europa", "Produz manufaturados", "Só importa"], correct: 1, exp: "Centro atacadista." },
-                    { q: "Peso do setor público:", options: ["Indústria maior", "Consumo dependente de salários e gastos públicos", "Comércio privado inexistente", "Exportações altas", "Só informal"], correct: 1, exp: "Renda pública." },
-                    { q: "BR de integração:", options: ["174", "210", "401", "319", "163"], correct: 1, exp: "<strong>BR-210</strong>." },
-                    { q: "Caracaraí ligado a:", options: ["Fronteira Venezuela", "Rio Branco e circulação regional", "Indústria", "Mineração", "Soja"], correct: 1, exp: "Histórico ribeirinho." },
-                    { q: "Desafio do comércio:", options: ["Excesso de consumidores", "Concentração em Boa Vista e dependência logística", "Muita industrialização", "Fronteiras fechadas", "Muita concorrência"], correct: 1, exp: "Centralização." },
-                    { q: "Via complementar:", options: ["Ferrovia", "Rio Branco (hidrovia)", "Aeroporto exclusivo", "BR-319", "Dutos"], correct: 1, exp: "Hidrovia sazonal." },
-                    { q: "Comércio varejista/atacadista:", options: ["Vilas", "Boa Vista", "Zona rural", "Só Pacaraima", "Só Bonfim"], correct: 1, exp: "Capital." },
-                    { q: "Renda pública movimenta:", options: ["Exportações", "Consumo de bens e serviços", "Investimentos estrangeiros", "Doações", "Poupança"], correct: 1, exp: "Mercado interno." },
-                    { q: "Pacaraima influenciado pela:", options: ["Guiana", "Venezuela", "Suriname", "Colômbia", "Peru"], correct: 1, exp: "Fronteira venezuelana." },
-                    { q: "Programas sociais:", options: ["Irrelevantes", "Injetam recursos e aquecem o comércio", "Reduzem consumo", "Só ajudam agricultura", "Só educação"], correct: 1, exp: "Transferência de renda." },
-                    { q: "Frase-chave comércio:", options: ["Inexistente", "Boa Vista domina, renda pública, BR-174 e rio Branco, influência fronteiriça", "Exportador", "Tecnológico", "Só informal"], correct: 1, exp: "Síntese." }
-                ]
-            };
+const state = {
+    currentSubject: 'clima',
+    questions: [],
+    currentIndex: 0,
+    userAnswers: {},
+    answerStatus: {},
+    darkMode: false
+};
 
-            const state = {
-                currentSubject: 'clima',
-                questions: [],
-                currentIndex: 0,
-                userAnswers: {},
-                answerStatus: {},
-                darkMode: false
-            };
+const subjectSelect = document.getElementById('subjectSelect');
+const toggleDarkBtn = document.getElementById('toggleDarkMode');
+const btnReset = document.getElementById('btnReset');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+const questionNumber = document.getElementById('questionNumber');
+const questionText = document.getElementById('questionText');
+const optionsContainer = document.getElementById('optionsContainer');
+const explanationBox = document.getElementById('explanationBox');
+const progressFill = document.getElementById('progressFill');
+const statusGrid = document.getElementById('statusGrid');
+const resultsBox = document.getElementById('resultsBox');
+const finalScore = document.getElementById('finalScore');
+const finalStats = document.getElementById('finalStats');
 
-            const subjectSelect = document.getElementById('subjectSelect');
-            const toggleDarkBtn = document.getElementById('toggleDarkMode');
-            const btnReset = document.getElementById('btnReset');
-            const btnPrev = document.getElementById('btnPrev');
-            const btnNext = document.getElementById('btnNext');
-            const questionNumber = document.getElementById('questionNumber');
-            const questionText = document.getElementById('questionText');
-            const optionsContainer = document.getElementById('optionsContainer');
-            const explanationBox = document.getElementById('explanationBox');
-            const progressFill = document.getElementById('progressFill');
-            const statusGrid = document.getElementById('statusGrid');
-            const resultsBox = document.getElementById('resultsBox');
-            const finalScore = document.getElementById('finalScore');
-            const finalStats = document.getElementById('finalStats');
-
-            function loadSubject(key) {
-                state.currentSubject = key;
-                state.questions = questionBank[key] || [];
-                state.currentIndex = 0;
-                state.userAnswers = {};
-                state.answerStatus = {};
-                resultsBox.classList.remove('visible');
-                renderQuestion();
-                renderStatusGrid();
-                updateButtons();
-                updateProgress();
-            }
-
-            function getLetter(i) { return ['A','B','C','D','E'][i]; }
-
-            function renderQuestion() {
-                const q = state.questions[state.currentIndex];
-                if (!q) return;
-                questionNumber.textContent = `Questão ${state.currentIndex+1} de ${state.questions.length}`;
-                questionText.textContent = q.q;
-                optionsContainer.innerHTML = '';
-
-                q.options.forEach((opt, i) => {
-                    const div = document.createElement('div');
-                    div.className = 'option';
-                    div.innerHTML = `<span class="option-letter">${getLetter(i)}</span>${opt}`;
-                    div.dataset.index = i;
-
-                    const status = state.answerStatus[state.currentIndex];
-                    const userAns = state.userAnswers[state.currentIndex];
-                    if (status === 'correct' && userAns === i) div.classList.add('correct-choice','disabled');
-                    else if (status === 'incorrect' && userAns === i) div.classList.add('incorrect-choice','disabled');
-                    else if (status && i === q.correct) div.classList.add('correct-choice','disabled');
-                    else if (status) div.classList.add('disabled');
-
-                    if (userAns === i && !status) div.classList.add('selected');
-
-                    div.addEventListener('click', () => selectOption(i));
-                    optionsContainer.appendChild(div);
-                });
-
-                if (state.answerStatus[state.currentIndex]) {
-                    explanationBox.innerHTML = `<strong>💡 Explicação:</strong> ${q.exp}`;
-                    explanationBox.classList.add('visible');
-                } else {
-                    explanationBox.classList.remove('visible');
-                    explanationBox.innerHTML = '';
-                }
-                updateProgress();
-                updateButtons();
-                renderStatusGrid();
-            }
-
-            function selectOption(index) {
-                if (state.answerStatus[state.currentIndex]) return;
-                state.userAnswers[state.currentIndex] = index;
-                const q = state.questions[state.currentIndex];
-                state.answerStatus[state.currentIndex] = (index === q.correct) ? 'correct' : 'incorrect';
-                renderQuestion();
-                checkAllAnswered();
-            }
-
-            function updateButtons() {
-                btnPrev.disabled = (state.currentIndex === 0);
-                btnNext.textContent = (state.currentIndex === state.questions.length-1) ? 'Finalizar 🏁' : 'Próxima ➡️';
-            }
-
-            function updateProgress() {
-                const answered = Object.keys(state.answerStatus).length;
-                const pct = (answered / state.questions.length) * 100;
-                progressFill.style.width = `${pct}%`;
-            }
-
-            function renderStatusGrid() {
-                statusGrid.innerHTML = '';
-                state.questions.forEach((_, i) => {
-                    const dot = document.createElement('div');
-                    dot.className = 'status-dot';
-                    dot.textContent = i+1;
-                    if (state.answerStatus[i] === 'correct') dot.classList.add('correct');
-                    else if (state.answerStatus[i] === 'incorrect') dot.classList.add('incorrect');
-                    else dot.classList.add('unanswered');
-                    if (i === state.currentIndex) dot.classList.add('active');
-                    dot.addEventListener('click', () => {
-                        state.currentIndex = i;
-                        renderQuestion();
-                        renderStatusGrid();
-                        updateButtons();
-                        updateProgress();
-                    });
-                    statusGrid.appendChild(dot);
-                });
-            }
-
-            function checkAllAnswered() {
-                if (Object.keys(state.answerStatus).length === state.questions.length) showResults();
-            }
-
-            function showResults() {
-                let correct = 0, incorrect = 0;
-                state.questions.forEach((_, i) => {
-                    if (state.answerStatus[i] === 'correct') correct++;
-                    else if (state.answerStatus[i] === 'incorrect') incorrect++;
-                });
-                finalScore.textContent = `${correct}/${state.questions.length}`;
-                const pct = Math.round((correct / state.questions.length)*100);
-                finalStats.innerHTML = `✅ Acertos: <strong>${correct}</strong> | ❌ Erros: <strong>${incorrect}</strong><br>📊 Aproveitamento: <strong>${pct}%</strong>`;
-                resultsBox.classList.add('visible');
-                resultsBox.scrollIntoView({ behavior:'smooth' });
-            }
-
-            function goPrev() {
-                if (state.currentIndex > 0) { state.currentIndex--; renderQuestion(); renderStatusGrid(); updateButtons(); updateProgress(); }
-            }
-            function goNext() {
-                if (state.currentIndex < state.questions.length-1) { state.currentIndex++; renderQuestion(); renderStatusGrid(); updateButtons(); updateProgress(); }
-                else { checkAllAnswered(); if (Object.keys(state.answerStatus).length < state.questions.length) alert('⚠️ Responda todas as questões antes de finalizar!'); }
-            }
-
-            function resetSubject() {
-                state.userAnswers = {};
-                state.answerStatus = {};
-                state.currentIndex = 0;
-                resultsBox.classList.remove('visible');
-                renderQuestion();
-                renderStatusGrid();
-                updateButtons();
-                updateProgress();
-            }
-
-            function toggleDark() {
-                state.darkMode = !state.darkMode;
-                document.body.classList.toggle('dark-mode', state.darkMode);
-                localStorage.setItem('geoRoraimaDark', state.darkMode?'1':'0');
-            }
-
-            // Init
-            if (localStorage.getItem('geoRoraimaDark') === '1') {
-                state.darkMode = true;
-                document.body.classList.add('dark-mode');
-            }
-
-            subjectSelect.addEventListener('change', e => loadSubject(e.target.value));
-            toggleDarkBtn.addEventListener('click', toggleDark);
-            btnReset.addEventListener('click', resetSubject);
-            btnPrev.addEventListener('click', goPrev);
-            btnNext.addEventListener('click', goNext);
-
-            document.addEventListener('keydown', e => {
-                if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
-                else if (e.key === 'ArrowRight') { e.preventDefault(); goNext(); }
-                else if (e.key >= '1' && e.key <= '5') {
-                    const idx = parseInt(e.key)-1;
-                    const q = state.questions[state.currentIndex];
-                    if (q && idx < q.options.length) selectOption(idx);
-                }
-            });
-
-            loadSubject('clima');
-            console.log('✅ Simulador Geografia RR carregado | 5 alternativas (A-E) | 220 questões');
-        })();
-    </script>
+function loadSubject(key) {
+    state.currentSubject = key;
+    state.questions = questionBank[key] || [];
+    state.currentIndex = 0;
+    state.userAnswers = {};
+    state.answerStatus = {};
+    resultsBox.classList.remove('visible');
+    renderQuestion();
+    renderStatusGrid();
+    updateButtons();
+    updateProgress();
+}
+function getLetter(i) { return ['A','B','C','D','E'][i]; }
+function renderQuestion() {
+    const q = state.questions[state.currentIndex];
+    if (!q) return;
+    questionNumber.textContent = `Questão ${state.currentIndex+1} de ${state.questions.length}`;
+    questionText.textContent = q.q;
+    optionsContainer.innerHTML = '';
+    q.options.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.innerHTML = `<span class="option-letter">${getLetter(i)}</span>${opt}`;
+        div.dataset.index = i;
+        const status = state.answerStatus[state.currentIndex];
+        const userAns = state.userAnswers[state.currentIndex];
+        if (status === 'correct' && userAns === i) div.classList.add('correct-choice','disabled');
+        else if (status === 'incorrect' && userAns === i) div.classList.add('incorrect-choice','disabled');
+        else if (status && i === q.correct) div.classList.add('correct-choice','disabled');
+        else if (status) div.classList.add('disabled');
+        if (userAns === i && !status) div.classList.add('selected');
+        div.addEventListener('click', () => selectOption(i));
+        optionsContainer.appendChild(div);
+    });
+    if (state.answerStatus[state.currentIndex]) {
+        explanationBox.innerHTML = `<strong>💡 Explicação:</strong> ${q.exp}`;
+        explanationBox.classList.add('visible');
+    } else {
+        explanationBox.classList.remove('visible');
+        explanationBox.innerHTML = '';
+    }
+    updateProgress();
+    updateButtons();
+    renderStatusGrid();
+}
+function selectOption(index) {
+    if (state.answerStatus[state.currentIndex]) return;
+    state.userAnswers[state.currentIndex] = index;
+    const q = state.questions[state.currentIndex];
+    state.answerStatus[state.currentIndex] = (index === q.correct) ? 'correct' : 'incorrect';
+    renderQuestion();
+    checkAllAnswered();
+}
+function updateButtons() {
+    btnPrev.disabled = (state.currentIndex === 0);
+    btnNext.textContent = (state.currentIndex === state.questions.length-1) ? 'Finalizar 🏁' : 'Próxima ➡️';
+}
+function updateProgress() {
+    const answered = Object.keys(state.answerStatus).length;
+    const pct = (answered / state.questions.length) * 100;
+    progressFill.style.width = `${pct}%`;
+}
+function renderStatusGrid() {
+    statusGrid.innerHTML = '';
+    state.questions.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'status-dot';
+        dot.textContent = i+1;
+        if (state.answerStatus[i] === 'correct') dot.classList.add('correct');
+        else if (state.answerStatus[i] === 'incorrect') dot.classList.add('incorrect');
+        else dot.classList.add('unanswered');
+        if (i === state.currentIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            state.currentIndex = i;
+            renderQuestion();
+            renderStatusGrid();
+            updateButtons();
+            updateProgress();
+        });
+        statusGrid.appendChild(dot);
+    });
+}
+function checkAllAnswered() {
+    if (Object.keys(state.answerStatus).length === state.questions.length) showResults();
+}
+function showResults() {
+    let correct=0, incorrect=0;
+    state.questions.forEach((_, i) => {
+        if (state.answerStatus[i] === 'correct') correct++;
+        else if (state.answerStatus[i] === 'incorrect') incorrect++;
+    });
+    finalScore.textContent = `${correct}/${state.questions.length}`;
+    const pct = Math.round((correct / state.questions.length)*100);
+    finalStats.innerHTML = `✅ Acertos: <strong>${correct}</strong> | ❌ Erros: <strong>${incorrect}</strong><br>📊 Aproveitamento: <strong>${pct}%</strong>`;
+    resultsBox.classList.add('visible');
+    resultsBox.scrollIntoView({ behavior:'smooth' });
+}
+function goPrev() { if (state.currentIndex > 0) { state.currentIndex--; renderQuestion(); renderStatusGrid(); updateButtons(); updateProgress(); } }
+function goNext() {
+    if (state.currentIndex < state.questions.length-1) { state.currentIndex++; renderQuestion(); renderStatusGrid(); updateButtons(); updateProgress(); }
+    else { checkAllAnswered(); if (Object.keys(state.answerStatus).length < state.questions.length) alert('⚠️ Responda todas as questões antes de finalizar!'); }
+}
+function resetSubject() {
+    state.userAnswers = {};
+    state.answerStatus = {};
+    state.currentIndex = 0;
+    resultsBox.classList.remove('visible');
+    renderQuestion();
+    renderStatusGrid();
+    updateButtons();
+    updateProgress();
+}
+function toggleDark() {
+    state.darkMode = !state.darkMode;
+    document.body.classList.toggle('dark-mode', state.darkMode);
+    localStorage.setItem('geoRoraimaDark', state.darkMode?'1':'0');
+}
+if (localStorage.getItem('geoRoraimaDark') === '1') {
+    state.darkMode = true;
+    document.body.classList.add('dark-mode');
+}
+subjectSelect.addEventListener('change', e => loadSubject(e.target.value));
+toggleDarkBtn.addEventListener('click', toggleDark);
+btnReset.addEventListener('click', resetSubject);
+btnPrev.addEventListener('click', goPrev);
+btnNext.addEventListener('click', goNext);
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); goNext(); }
+    else if (e.key >= '1' && e.key <= '5') {
+        const idx = parseInt(e.key)-1;
+        const q = state.questions[state.currentIndex];
+        if (q && idx < q.options.length) selectOption(idx);
+    }
+});
+loadSubject('clima');
+console.log('✅ Simulador Geografia RR FCC | 220 questões contextualizadas | 5 alternativas A-E');
+})();
+</script>
 </body>
 </html>
